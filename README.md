@@ -6,6 +6,7 @@
 <h3><span style="text-decoration: underline;"><span style="color: #008080; text-decoration: underline;">Motivation:</span></span></h3>
 <h3>&nbsp;</h3>
 <h3><span style="text-decoration: underline;"><span style="color: #008080; text-decoration: underline;">Description:</span></span></h3>
+<p>Art Point is a social media web application where users can show off their masterpieces on their profile as well buy others art. The users can have their own profiles, and the website will have a search bar to search for users based on their username. Users will be able to upload art onto their profiles for either display or a “for sale” section, which will contain items for sale from the user.</p>
 <h3>&nbsp;</h3>
 <h3><span style="text-decoration: underline;"><span style="color: #008080; text-decoration: underline;">Screenshots/Demo:</span></span></h3>
 <h3>&nbsp;</h3>
