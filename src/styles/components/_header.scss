@@ -1,0 +1,12 @@
+@use "../var";
+@import "../mixins";
+
+header {
+	@include flex-container(row, space-between, center, nowrap);
+	#navigation {
+		@include flex-container(row, space-between, center, nowrap);
+		li {
+			margin: 0 0.5rem;
+		}
+	}
+}
