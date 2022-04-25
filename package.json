@@ -1,40 +1,27 @@
 {
-	"name": "artpoint",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"@testing-library/jest-dom": "^5.16.4",
-		"@testing-library/react": "^12.1.4",
-		"@testing-library/user-event": "^13.5.0",
-		"react": "^18.0.0",
-		"react-dom": "^18.0.0",
-		"react-router-dom": "^6.3.0",
-		"react-scripts": "5.0.0",
-		"sass": "^1.50.0",
-		"web-vitals": "^2.1.4"
-	},
-	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject"
-	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	}
+  "name": "art-point",
+  "version": "1.0.0",
+  "description": "Module for Art Point",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jnoel01/Art-Point.git"
+  },
+  "author": "Jack Schneiderhan Cindy Zhang Eric Rudzin Brendan Probst Jessica Noel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jnoel01/Art-Point/issues"
+  },
+  "homepage": "https://github.com/jnoel01/Art-Point#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.5",
+    "express-session": "^1.17.2",
+    "handlebars": "^4.7.7",
+    "mongodb": "^4.5.0"
+  }
 }
