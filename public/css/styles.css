@@ -104,6 +104,16 @@ li {
   height: 0;
 }
 
+.page {
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
 button {
   background: none;
   color: inherit;
@@ -127,14 +137,16 @@ input {
   border-radius: 0.25rem;
 }
 
-.page {
-  margin: 0 auto;
+form {
+  width: min(100%, 40rem);
+}
+form input {
+  margin: 0.5rem 0;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
+}
+form button {
+  margin: 1rem auto;
+  width: 100%;
 }
 
 /*# sourceMappingURL=styles.css.map */
