@@ -104,6 +104,10 @@ li {
   height: 0;
 }
 
+header {
+  background-color: #dddddd;
+}
+
 .page {
   margin: 0 auto;
   width: 100%;
