@@ -113,6 +113,60 @@ let exportedMethods = {
         else{
             throw "Either the username or password is invalid";
         }
+    },
+    async resetPassword(username, password){
+        const userCollection = await users();
+
+        if(!username){
+            throw "Username must be supplied!";
+        }
+        if(!password){
+            throw "New password must be supplied!";
+        }
+        if(username.trim().length === 0){
+            throw "Username cannot just be empty spaces!";
+        }
+        for(x of username){
+            if(x === " "){
+                throw "Username cannot have spaces!";
+            }
+        }
+        var regEx = /^[0-9a-zA-Z]+$/; //checking for alphanumeric only. got regex from w3schools!
+        if(!username.match(regEx)){
+            throw "Username must only contain alphanumeric characters!";
+        }
+        if(username.length < 4){
+            throw "Username must be at least 6 characters long.";
+        }
+        if(password.trim().length === 0){
+            throw "New password cannot just be empty spaces!";
+        }
+        for(x of password){
+            if(x === " "){
+                throw "New password cannot have spaces!";
+            }
+        }
+        if(password.length < 6){
+            throw "New password must be at least 6 characters long.";
+        }
+
+        let usernameLower = username.toLowerCase();
+        
+        let userToCheck = await userCollection.findOne({username: usernameLower});
+
+        if(!userToCheck){
+            throw "Could not find this username. Please try another!";
+        }
+
+        let hashPass = await bcrypt.hash(password, saltRounds);
+
+        userCollection.updateOne({username: usernameLower}, 
+            {
+                $set: {
+                    password: hashPass
+                }
+            });
+        return await {passwordUpdated: true};
     }
 };
 
