@@ -1,0 +1,31 @@
+@use "./var";
+@use "./mixins";
+
+.standard-card {
+	border-radius: 0.5rem;
+	background-color: var.$fg;
+	border: 1px solid var.$border;
+	padding: 1rem;
+}
+.post-container {
+	height: 100%;
+	overflow: scroll;
+	max-height: 100%;
+	@include flex-container(column, flex-start, center, nowrap);
+}
+.post {
+	max-width: 30rem;
+	width: 100%;
+	margin: 0.5rem auto;
+	img {
+		width: 100%;
+		border-top-left-radius: 0.5rem;
+		border-top-right-radius: 0.5rem;
+	}
+	.details {
+		padding: 0.5rem;
+		border-bottom-left-radius: 0.5rem;
+		border-bottom-right-radius: 0.5rem;
+		background-color: var.$fg;
+	}
+}

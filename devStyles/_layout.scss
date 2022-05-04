@@ -1,0 +1,51 @@
+@use "./var";
+@use "./mixins";
+
+.page {
+	max-width: 80rem;
+	padding: 1rem;
+	height: 100%;
+	max-height: calc(100vh - 5rem);
+}
+.two-column {
+	display: -ms-grid;
+	display: grid;
+	align-items: flex-start;
+	height: 100%;
+	.left,
+	.right {
+		height: 100%;
+	}
+}
+
+@media screen and (min-width: 800px) {
+	//mobile
+	.two-column {
+		grid-template-columns: 1fr 1fr;
+		-ms-grid-column: 1fr 1fr;
+
+		.top {
+			-ms-grid-column: 1/2;
+			grid-column: 1/2;
+		}
+		.bottom {
+			-ms-grid-column: 2/3;
+			grid-column: 2/3;
+		}
+	}
+}
+@media screen and (max-width: 800px) {
+	//web and above
+	.two-column {
+		grid-template-rows: auto auto;
+		-ms-grid-row: auto auto;
+		.left {
+			-ms-grid-row: 1/2;
+			grid-row: 1/2;
+		}
+		.right {
+			-ms-grid-row: 2/3;
+			grid-row: 2/3;
+		}
+	}
+}

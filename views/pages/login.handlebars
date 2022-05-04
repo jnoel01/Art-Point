@@ -7,25 +7,37 @@
 		<main class="page">
 			<h1>Login</h1>
 			<form action="/login" method="POST" id="login-form">
-				<label for="username">
-					<p>
-						Username
-					</p>
-				</label>
-				<input id="username" name="username" />
-				<label for="password">
-					<p>
-						Password
-					</p>
-				</label>
-				<input id="password" name="password" />
+				<div class="form__div">
+					<label for="username">Username</label>
+					<input
+						type="text"
+						name="username"
+						id="userName"
+						placeholder="Username"
+						size="30"
+						minlength="3"
+						pattern="[A-Za-z]{3}"
+						required
+					/>
+				</div>
+
+				<div class="form__div">
+					<label for="password">Password</label>
+					<input
+						type="password"
+						name="hashedPassword"
+						id="hashedPassword"
+						placeholder="Password"
+						size="30"
+						minlength="8"
+						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						required
+					/>
+				</div>
+
 				<button type="submit" class="block">Log In</button>
 			</form>
-			<div class="error">
-				{{#if error}}
-					<p>{{error}}</p>
-				{{/if}}
-			</div>
+
 			<a href="/signup">Need to register? Click here to sign-up</a>
 			<a href="/passwordReset">Forgot Password? Click Here!</a>
 		</main>

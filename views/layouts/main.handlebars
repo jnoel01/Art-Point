@@ -2,16 +2,49 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="/public/css/styles.css" />
+		<script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+		<link
+			href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
 		<header>
 			<h6 class="mainHeader accent">Art Point</h6>
-			<a href="/home">Home</a>
-			<a href="/account">Profile</a>
+			<div class="icon__container">
+				<a href="/create"></a>
+				<a href="/home"><box-icon name="home"></box-icon></a>
+				<a href="/account">
+					<box-icon name="user"></box-icon>
+				</a>
+				<a href="#"><box-icon name="store-alt"></box-icon></a>
+			</div>
 
 		</header>
+
 		<main>
 			{{{body}}}
 		</main>
+
+		<footer>
+			<div class="social__container">
+				<a href="#" class="page__item"><box-icon name='instagram-alt' type='logo' ></box-icon></i></a>
+				<a href="#" class="page__item"><box-icon name='snapchat' type='logo' ></box-icon></a>
+				<a href="#" class="page__item"><box-icon name='facebook-square' type='logo' ></box-icon></a>
+				<a href="#" class="page__item"><box-icon name='linkedin-square' type='logo' ></box-icon></a>
+			</div>
+
+			<div>
+				<p class="accent">Art Point</p>
+			</div>
+
+			<div class="nav__container">
+				<a href="#" class="page__item">home</a>
+				<a href="#" class="page__item">artist</a>
+				<a href="#" class="page__item">store</a>
+				<a href="#" class="page__item">faqs</a>
+				<a href="#" class="page__item">about us</a>
+			</div>
+		</footer>
 	</body>
 </html>

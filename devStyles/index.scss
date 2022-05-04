@@ -33,7 +33,7 @@ html {
 body {
 	padding: 0;
 	margin: 0;
-	overflow: scroll;
+	overflow: hidden;
 	height: 100%;
 	width: 100%;
 }
@@ -100,6 +100,38 @@ li {
 }
 header {
 	background-color: var.$fg;
+	height: 5rem;
+	padding: 1rem;
+	@include flex-container(row, flex-end, center, nowrap);
+	.mainHeader {
+		margin-right: auto;
+	}
+	.icon__container {
+		@include flex-container(row, flex-start, center, nowrap);
+		a {
+			margin: 0 0.5rem;
+		}
+	}
+}
+footer {
+	position: fixed;
+	bottom: 0;
+	background-color: var.$fg;
+	width: 100%;
+	height: 3rem;
+	padding: 0.5rem 1rem;
+	@include flex-container(row, flex-start, center, nowrap);
+	.social-icons {
+		//not working
+		a {
+			i {
+				color: var.$primary-default;
+			}
+		}
+	}
+	.nav__container {
+		margin-left: auto;
+	}
 }
 
 .page {
@@ -108,3 +140,6 @@ header {
 	@include flex-container(column, flex-start, center, nowrap);
 }
 @import "./forms";
+@import "./layout";
+@import "./account";
+@import "./components";
