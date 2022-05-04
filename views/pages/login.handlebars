@@ -1,0 +1,46 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Login</title>
+	</head>
+	<body>
+		<main class="page">
+			<h1>Login</h1>
+			<form action="/login" method="POST" id="login-form">
+				<div class="form__div">
+					<label for="username">Username</label>
+					<input
+						type="text"
+						name="username"
+						id="userName"
+						placeholder="Username"
+						size="30"
+						minlength="3"
+						pattern="[A-Za-z]{3}"
+						required
+					/>
+				</div>
+
+				<div class="form__div">
+					<label for="password">Password</label>
+					<input
+						type="password"
+						name="hashedPassword"
+						id="hashedPassword"
+						placeholder="Password"
+						size="30"
+						minlength="8"
+						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						required
+					/>
+				</div>
+
+				<button type="submit" class="block">Log In</button>
+			</form>
+
+			<a class="loginSubhead" href="/signup">Need to register? Click here to
+				sign-up</a>
+			<a class="loginSubhead" href="/passwordReset">Forgot Password? Click Here!</a>
+		</main>
+	</body>
+</html>

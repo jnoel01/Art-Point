@@ -6,6 +6,7 @@
 <h3><span style="text-decoration: underline;"><span style="color: #008080; text-decoration: underline;">Motivation:</span></span></h3>
 <h3>&nbsp;</h3>
 <h3><span style="text-decoration: underline;"><span style="color: #008080; text-decoration: underline;">Description:</span></span></h3>
+<p>Art Point is a social media web application where users can show off their masterpieces on their profile as well buy others art. The users can have their own profiles, and the website will have a search bar to search for users based on their username. Users will be able to upload art onto their profiles for either display or a “for sale” section, which will contain items for sale from the user.</p>
 <h3>&nbsp;</h3>
 <h3><span style="text-decoration: underline;"><span style="color: #008080; text-decoration: underline;">Screenshots/Demo:</span></span></h3>
 <h3>&nbsp;</h3>
@@ -16,10 +17,10 @@
 <p>&nbsp;</p>
 <h2 style="color: #2e6c80;">Some useful features:</h2>
 <ol style="list-style: none; font-size: 14px; line-height: 32px; font-weight: bold;">
-<li style="clear: both;"><img style="float: left;" src="https://html-online.com/img/01-interactive-connection.png" alt="interactive connection" width="45" />one</li>
-<li style="clear: both;"><img style="float: left;" src="https://html-online.com/img/02-html-clean.png" alt="html cleaner" width="45" />two</li>
-<li style="clear: both;"><img style="float: left;" src="https://html-online.com/img/04-replace.png" alt="replace text" width="45" />three</li>
-<li style="clear: both;"><img style="float: left;" src="https://html-online.com/img/05-gibberish.png" alt="gibberish" width="45" /> four</li>
-<li style="clear: both;"><img style="float: left;" src="https://html-online.com/img/6-table-div-html.png" alt="html table div" width="45" /> five</li>
+<p><img style="float: left;" src="https://html-online.com/img/01-interactive-connection.png" alt="interactive connection" width="45" /> Connect with other artists from all around the world </p>
+<p> <img style="float: left;" src="https://html-online.com/img/02-html-clean.png" alt="html cleaner" width="45" />Browse a unique selection of handmade art</p>
+<p> <img style="float: left;" src="https://html-online.com/img/04-replace.png" alt="replace text" width="45" /> Share and market your skills for good money </p>
+<p> <img style="float: left;" src="https://html-online.com/img/05-gibberish.png" alt="gibberish" width="45" /> four</p>
+<p> <img style="float: left;" src="https://html-online.com/img/6-table-div-html.png" alt="html table div" width="45" /> five</p>
 </ol>
 <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>

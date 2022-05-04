@@ -1,0 +1,27 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{artTitle}}</title>
+  </head>
+  <body>
+    <main>
+      <div>
+        <h1>{{artTitle}}</h1>
+        <p>By {{artist}}</p>
+        <h2>Rating: {{rating}}</h2>
+        <div>
+            <img src="{{artImage}}" />
+            <p>here is a super dope pic</p>
+        </div>
+        {{#if forSale}}
+          <h2>${{salePrice}} USD</h2>
+          <a>Click here to purchase!</p>
+        {{/if}}
+        <div>
+          <p>Genre: {{genre}}</p>
+          <h2>Comments:</h2>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
