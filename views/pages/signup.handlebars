@@ -27,8 +27,9 @@
 						placeholder="First Name"
 						size="30"
 						pattern="[A-Za-z]{3}"
-						required
+						title="First Name should only include Alphanumeric Symbols. (Example: John)"
 					/>
+					required />
 					<input
 						type="text"
 						name="lastName"
@@ -36,6 +37,7 @@
 						placeholder="Last Name"
 						size="30"
 						pattern="[A-Za-z]{3}"
+						title="Last Name should only include Alphanumeric Symbols. (Example: Smith)"
 						required
 					/>
 				</div>
@@ -50,6 +52,7 @@
 						size="30"
 						minlength="3"
 						pattern="[A-Za-z]{3}"
+						title="Username should only include Alphanumeric Symbols. (Example: jSmith)"
 						required
 					/>
 				</div>
@@ -64,6 +67,7 @@
 						size="30"
 						minlength="8"
 						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						title="Password should be 8 letters long with a symbol, number, and uppercase letter. (Example: passworD123!)"
 						required
 					/>
 					<input
@@ -74,6 +78,7 @@
 						size="30"
 						minlength="8"
 						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						title="Password should match and be 8 letters long with a symbol, number, and uppercase letter. (Example: passworD123!)"
 						required
 					/>
 				</div>
@@ -86,8 +91,8 @@
 						placeholder="Email"
 						minlength="8"
 						pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+						required
 					/>
-					required />
 				</div>
 
 				<div class="form__div">
