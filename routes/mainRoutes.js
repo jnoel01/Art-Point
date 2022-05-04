@@ -179,6 +179,7 @@ router.post('/passwordReset', async(req, res) => {
         if(req.body.password.length < 6){
             throw "Password must be at least 6 characters long.";
         }
+        
         const updateUser = await userData.resetPassword(req.body.username, req.body.password);
         
         if(updateUser.passwordUpdated){

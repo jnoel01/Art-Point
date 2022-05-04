@@ -160,6 +160,15 @@ let exportedMethods = {
 
         let hashPass = await bcrypt.hash(password, saltRounds);
 
+        console.log(userToCheck.password);
+        console.log(hashPass);
+
+        let checkPassword = await bcrypt.compare(password, userToCheck.password);
+
+        if(checkPassword){
+            throw "This is your current password!";
+        }
+
         userCollection.updateOne({username: usernameLower}, 
             {
                 $set: {
