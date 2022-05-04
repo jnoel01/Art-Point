@@ -6,19 +6,113 @@
 	<body>
 		<main class="page">
 			<h1>SignUp</h1>
+
 			<form action="/signup" method="POST" id="signup-form">
-				<label for="username">Username</label>
-				<input id="username" name="username" class="username" />
-				<label for="password">Password</label>
-				<input id="password" name="password" />
+				<div class="form__div">
+					<label for="profilePicture">Upload Profile Picture</label>
+					<input
+						type="file"
+						name="profilePicture"
+						id="profile_picture"
+						required
+					/>
+				</div>
+
+				<div class="form__div">
+					<label for="name">Name</label>
+					<input
+						type="text"
+						name="firstName"
+						id="firstName"
+						placeholder="First Name"
+						size="30"
+						pattern="[A-Za-z]{3}"
+						title="First Name should only include Alphanumeric Symbols. (Example: John)"
+					/>
+					required />
+					<input
+						type="text"
+						name="lastName"
+						id="lastName"
+						placeholder="Last Name"
+						size="30"
+						pattern="[A-Za-z]{3}"
+						title="Last Name should only include Alphanumeric Symbols. (Example: Smith)"
+						required
+					/>
+				</div>
+
+				<div class="form__div">
+					<label for="username">Username</label>
+					<input
+						type="text"
+						name="username"
+						id="userName"
+						placeholder="Username"
+						size="30"
+						minlength="3"
+						pattern="[A-Za-z]{3}"
+						title="Username should only include Alphanumeric Symbols. (Example: jSmith)"
+						required
+					/>
+				</div>
+
+				<div class="form__div">
+					<label for="password">Password</label>
+					<input
+						type="password"
+						name="hashedPassword"
+						id="hashedPassword"
+						placeholder="Password"
+						size="30"
+						minlength="8"
+						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						title="Password should be 8 letters long with a symbol, number, and uppercase letter. (Example: passworD123!)"
+						required
+					/>
+					<input
+						type="password"
+						name="hashedPassword2"
+						id="hashedPassword2"
+						placeholder="Re-enter Password"
+						size="30"
+						minlength="8"
+						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						title="Password should match and be 8 letters long with a symbol, number, and uppercase letter. (Example: passworD123!)"
+						required
+					/>
+				</div>
+
+				<div class="form__div"><label for="email">Email</label>
+					<input
+						type="email"
+						name="userEmail"
+						id="userEmail"
+						placeholder="Email"
+						minlength="8"
+						pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+						required
+					/>
+				</div>
+
+				<div class="form__div">
+					<label for="date_of_birth">Date of Birth</label>
+					<input
+						type="date"
+						name="userDob"
+						id="userDob"
+						min="1900-01-01"
+						max="2002-01-01"
+						value="2022-01-01"
+						required
+					/>
+				</div>
+
 				<button type="submit">Sign Up</button>
 			</form>
-			<div class="error">
-				{{#if error}}
-					<p>{{error}}</p>
-				{{/if}}
-			</div>
-			<a class = "loginSubhead" href="/login">Already have an account? Click here to log-in</a>
+
+			<a class="loginSubhead" href="/login">Already have an account? Click here
+				to log-in</a>
 		</main>
 	</body>
 </html>

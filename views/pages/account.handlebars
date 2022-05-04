@@ -1,15 +1,49 @@
-<!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 
-<head>
-    <meta charset = "utf-8">
-    <title>Lab 10</title>
-</head>
-<body>
-    <main>
-        <h1>Private (Shhh)</h1>
-        <p>Your user name is: {{username}} </p>
-        <a href = "/logout">Click here to logout</a>
-    </main>
-</body>
+	<head>
+		<meta charset="utf-8" />
+		<title>{{username}}</title>
+	</head>
+	<body>
+		<main class="account page two-column">
+			<div class="left top">
+				<div class="account-details standard-card">
+					<img
+						src="/public/no_image.jpeg"
+						class="profile-pic"
+						alt="profile picture"
+					/>
+					<h6 class="accent">{{username}}</h6>
+
+				</div>
+			</div>
+			<div class="right bottom">
+				<h2>{{username}}'s Art</h2>
+				<div class="post-container">
+					<div class="post">
+						<img src="/public/no_image.jpeg" alt="picture of art" />
+						<div class="details">
+							<h6>Art Name</h6>
+							<p>Artist Name</p>
+							<p class="bio">Lorem ipsum dolor sit amet consectetur adipisicing
+								elit. Laudantium error harum dolores hic blanditiis repudiandae
+								et mollitia est alias vel esse rerum, nam quo debitis modi.
+								Temporibus asperiores quisquam ut.</p>
+						</div>
+					</div>
+					<div class="post">
+						<img src="/public/no_image.jpeg" alt="picture of art" />
+						<div class="details">
+							<h6>Art Name</h6>
+							<p>Artist Name</p>
+							<p class="bio">Lorem ipsum dolor sit amet consectetur adipisicing
+								elit. Laudantium error harum dolores hic blanditiis repudiandae
+								et mollitia est alias vel esse rerum, nam quo debitis modi.
+								Temporibus asperiores quisquam ut.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
 </html>
