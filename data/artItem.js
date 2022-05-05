@@ -3,6 +3,7 @@ const users = mongoCollections.users;
 const { ObjectId } = require("mongodb");
 const { type } = require("express/lib/response");
 const { artItems } = require("../config/mongoCollections");
+const { artItem } = require(".");
 
 let exportedMethods = {
   async createArtItem(artTitle, forSale, setPrice, artRating, typeGenre) {
@@ -75,6 +76,30 @@ let exportedMethods = {
 
     const newId = insertInfo.insertedId.toString();
   },
-};
 
+  async getAllArtItems() {
+    const artItemCollection = await artItems();
+    const artItemList = await artItemCollection.find({}).toArray();
+    if (!artItemList) throw "Could not get all art items";
+    for (i in artItemList) {
+      artItemList[i]._id = artItemList[i]._id.toString();
+    }
+    return artItemList;
+  },
+
+  async getArtItemById(id) {
+    if (!id) throw "You must provide an id to search for";
+    if (typeof id !== "string") throw "Id must be a string";
+    if (id.trim().length === 0)
+      throw "Id cannot be an empty string or just spaces";
+    id = id.trim();
+    if (!ObjectId.isValid(id)) throw "Invalid object ID";
+    const artItemCollection = await artItems();
+    const artItem = await artItemCollection.findOne({ _id: ObjectId(id) });
+    if (artItem === null) throw "No art item with that id";
+    artItem._id = artItem._id.toString();
+
+    return artItem;
+  },
+};
 module.exports = exportedMethods;
