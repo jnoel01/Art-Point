@@ -1,6 +1,7 @@
 const mainRoutes = require("./mainRoutes");
 const artItemRoutes = require("./artItemRoutes");
 const artSubmissionRoutes = require("./artSubmissionRoutes");
+
 const constructorMethod = (app) => {
   app.use("/", mainRoutes);
   app.use("/item", artItemRoutes);

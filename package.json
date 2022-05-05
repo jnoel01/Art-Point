@@ -1,27 +1,33 @@
 {
-  "name": "art-point",
-  "version": "1.0.0",
-  "description": "Module for Art Point",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jnoel01/Art-Point.git"
-  },
-  "author": "Jack Schneiderhan Cindy Zhang Eric Rudzin Brendan Probst Jessica Noel",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jnoel01/Art-Point/issues"
-  },
-  "homepage": "https://github.com/jnoel01/Art-Point#readme",
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "express": "^4.17.3",
-    "express-handlebars": "^6.0.5",
-    "express-session": "^1.17.2",
-    "handlebars": "^4.7.7",
-    "mongodb": "^4.5.0"
-  }
+	"name": "art-point",
+	"version": "1.0.0",
+	"description": "Module for Art Point",
+	"main": "app.js",
+	"scripts": {
+		"start": "nodemon app.js",
+		"sass": "sass --watch devStyles/index.scss:public/css/styles.css",
+		"startDev": "npm run start & npm run sass"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jnoel01/Art-Point.git"
+	},
+	"author": "Jack Schneiderhan Cindy Zhang Eric Rudzin Brendan Probst Jessica Noel",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/jnoel01/Art-Point/issues"
+	},
+	"homepage": "https://github.com/jnoel01/Art-Point#readme",
+	"dependencies": {
+		"bcrypt": "^5.0.1",
+		"express": "^4.17.3",
+		"express-handlebars": "^6.0.5",
+		"express-session": "^1.17.2",
+		"handlebars": "^4.7.7",
+		"mongodb": "^4.5.0",
+		"nodemon": "^2.0.16"
+	},
+	"devDependencies": {
+		"sass": "^1.51.0"
+	}
 }

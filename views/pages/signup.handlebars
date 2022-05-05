@@ -1,26 +1,24 @@
-<!DOCTYPE html>
-<html lang = "en">
-
-<head>
-    <meta charset = "utf-8">
-    <title>Signup</title>
-</head>
-<body>
-    <main>
-        <h1>Signup</h1>
-        <form action="/signup" method = "POST" id="signup-form">
-            <label for = "username">Username</label>
-            <input id = "username" name = "username">
-            <label for = "password">Password</label>
-            <input id = "password" name = "password">
-            <button type = "submit">Sign Up</button>
-        </form>
-        <div class = "error"> 
-            {{#if error}}
-                <p>{{error}}</p>
-            {{/if}}
-        </div>
-        <a href="/login">Already have an account? Click here to log-in</a>
-    </main>
-</body>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>SignUp</title>
+	</head>
+	<body>
+		<main class="page">
+			<h1>SignUp</h1>
+			<form action="/signup" method="POST" id="signup-form">
+				<label for="username">Username</label>
+				<input id="username" name="username" class="username" />
+				<label for="password">Password</label>
+				<input id="password" name="password" />
+				<button type="submit">Sign Up</button>
+			</form>
+			<div class="error">
+				{{#if error}}
+					<p>{{error}}</p>
+				{{/if}}
+			</div>
+			<a href="/login">Already have an account? Click here to log-in</a>
+		</main>
+	</body>
 </html>

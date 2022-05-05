@@ -1,0 +1,110 @@
+@use "./var";
+@import "./mixins";
+@import url("https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap");
+
+* {
+	box-sizing: border-box;
+	&.block {
+		display: block;
+	}
+}
+
+@media screen and (min-width: 800px) {
+	//big
+	html {
+		font-size: 16px;
+	}
+}
+@media screen and (max-width: 800px) {
+	//small
+	html {
+		font-size: calc(1vw + 10px);
+	}
+}
+html {
+	margin: 0;
+	padding: 0;
+	overflow-y: hidden;
+	overflow-x: hidden;
+	width: 100vw;
+	height: 100vh;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	overflow: scroll;
+	height: 100%;
+	width: 100%;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	color: var.$text;
+	padding: 0;
+	margin: 0;
+}
+h1,
+h2,
+h3,
+h4.accent,
+h5.accent,
+h6.accent,
+p.accent {
+	font-family: "Fugaz One", cursive;
+}
+h1.default,
+h2.default,
+h3.default,
+h4,
+h5,
+h6,
+p,
+a,
+label {
+	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+		"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+h1 {
+	font-size: 3rem;
+}
+h2 {
+	font-size: 2.5rem;
+}
+h3 {
+	font-size: 2rem;
+}
+h4 {
+	font-size: 1.75rem;
+}
+h5 {
+	font-size: 1.5rem;
+}
+h6 {
+	font-size: 1.25rem;
+}
+p {
+	font-size: 1rem;
+}
+
+li {
+	list-style-type: none;
+}
+*::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+header {
+	background-color: var.$fg;
+}
+
+.page {
+	margin: 0 auto;
+	width: 100%;
+	@include flex-container(column, flex-start, center, nowrap);
+}
+@import "./forms";
