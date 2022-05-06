@@ -4,17 +4,10 @@ const bcrypt = require("bcrypt");
 const { ObjectId } = require("mongodb");
 
 let exportedMethods = {
-	async createUser(
-		profilePic,
-		userName, password,
-		firstName, lastName,
-		email, dob
-	) {
-		console.log("attemping to insert a user.");
+	async createUser(userName, password, firstName, lastName, email, dob) {
 		const userCollection = await users();
 
 		// ---------------- checks if instances are here. -------------
-		if (!profilePic) throw "Profile Picture is not supplied.";
 		if (!userName) throw "Username is not supplied.";
 		if (!firstName) throw "First Name is not supplied.";
 		if (!lastName) throw "Last Name is not supplied.";
@@ -23,10 +16,6 @@ let exportedMethods = {
 		if (!dob) throw "Date of Birth is not supplied.";
 
 		// -------------- checks if all strings are not empty ---------
-		if (profilePic.trim().length === 0)
-			throw "Profile Picture URL cannot just be empty spaces!";
-		if (userName.trim().length === 0)
-			throw "Username cannot just be empty spaces!";
 		if (firstName.trim().length === 0)
 			throw "First Name cannot just be empty spaces!";
 		if (lastName.trim().length === 0)
@@ -38,15 +27,22 @@ let exportedMethods = {
 
 		// ------------- checks if strings have unwanted characters --------
 		var regEx = /^[0-9a-zA-Z]+$/;
-		if (!userName.match(regEx)) throw "Username must only contain alphanumeric characters!";
-		if (!firstName.match(regEx)) throw "First Name must only contain alphanumeric characters!";
-		if (!lastName.match(regEx)) throw "Last Name must only contain alphanumeric characters!";
-		
+		if (!userName.match(regEx))
+			throw "Username must only contain alphanumeric characters!";
+		if (!firstName.match(regEx))
+			throw "First Name must only contain alphanumeric characters!";
+		if (!lastName.match(regEx))
+			throw "Last Name must only contain alphanumeric characters!";
+
 		// ------------- checks if length of strings are enough ------------
-		if (userName.length < 3) throw "Username must be at least 3 characters long.";
-		if (firstName.length < 3) throw "First Name must be at least 3 characters long.";
-		if (lastName.length < 3) throw "Last Name must be at least 3 characters long.";
-		if (password.length < 8) throw "Password must be at least 8 characters long.";
+		if (userName.length < 3)
+			throw "Username must be at least 3 characters long.";
+		if (firstName.length < 3)
+			throw "First Name must be at least 3 characters long.";
+		if (lastName.length < 3)
+			throw "Last Name must be at least 3 characters long.";
+		if (password.length < 8)
+			throw "Password must be at least 8 characters long.";
 		if (email.length < 8) throw "Email must be at least 8 characters long.";
 
 		// -------------- checks if username already exist -----------------
@@ -56,25 +52,24 @@ let exportedMethods = {
 
 		// -------------- get the date they created the account ------------------
 		var today = new Date();
-		var dd = String(today.getDate()).padStart(2, '0');
-		var mm = String(today.getMonth() + 1).padStart(2, '0'); 
+		var dd = String(today.getDate()).padStart(2, "0");
+		var mm = String(today.getMonth() + 1).padStart(2, "0");
 		var yyyy = today.getFullYear();
 
-		today = mm + '/' + dd + '/' + yyyy;
+		today = mm + "/" + dd + "/" + yyyy;
 
 		// --------------- inserting user's information into database --------
-		let hashedPassword = await bcrypt.hash(password, 16)
+		let hashedPassword = await bcrypt.hash(password, 16);
 		let userInserted = {
-			profilePic: profilePic,
 			userName: userName.toLowerCase(),
 			firstName: firstName,
 			lastName: lastName,
 			hashedPassword: hashedPassword,
 			userEmail: email,
 			userDob: dob,
-			dateJoined: "today",
+			dateJoined: today,
 			ownedArt: [],
-			userPurchases: []
+			userPurchases: [],
 		};
 
 		const newInsertInformation = await userCollection.insertOne(userInserted);
@@ -88,13 +83,17 @@ let exportedMethods = {
 		// ---------------- error checking -------------
 		if (!username) throw "Username must be supplied!";
 		if (!password) throw "Password must be supplied!";
-	
-		if (username.trim().length === 0) throw "Username cannot just be empty spaces!";
-		if (password.trim().length === 0) throw "Password cannot just be empty spaces!";
 
-		if (username.length < 3) throw "Username must be at least 3 characters long.";
-		if (password.length < 8) throw "Password must be at least 8 characters long.";
-		
+		if (username.trim().length === 0)
+			throw "Username cannot just be empty spaces!";
+		if (password.trim().length === 0)
+			throw "Password cannot just be empty spaces!";
+
+		if (username.length < 3)
+			throw "Username must be at least 3 characters long.";
+		if (password.length < 8)
+			throw "Password must be at least 8 characters long.";
+
 		for (x of username) {
 			if (x === " ") throw "Username cannot have spaces!";
 		}
@@ -102,19 +101,23 @@ let exportedMethods = {
 			if (x === " ") throw "Password cannot have spaces!";
 		}
 
-		var regEx = /^[0-9a-zA-Z]+$/; 
-		if (!username.match(regEx)) throw "Username must only contain alphanumeric characters!";
-		
+		var regEx = /^[0-9a-zA-Z]+$/;
+		if (!username.match(regEx))
+			throw "Username must only contain alphanumeric characters!";
+
 		// --------- finding user ----------
 		let usernameLower = username.toLowerCase();
 
-		let userToCheck = await userCollection.findOne({ username: usernameLower });
+		let userToCheck = await userCollection.findOne({ userName: usernameLower });
 		if (!userToCheck) throw "Either the username or password is invalid";
-		
+
 		// ---------- authenticating -----------
-		let checkPassword = await bcrypt.compare(password, userToCheck.password);
+		let checkPassword = await bcrypt.compare(
+			password,
+			userToCheck.hashedPassword
+		);
 		if (checkPassword) return { authenticated: true };
- 
+
 		throw "Either the username or password is invalid";
 	},
 	async resetPassword(username, password) {
@@ -123,13 +126,17 @@ let exportedMethods = {
 		// ---------------- error checking -------------
 		if (!username) throw "Username must be supplied!";
 		if (!password) throw "Password must be supplied!";
-	
-		if (username.trim().length === 0) throw "Username cannot just be empty spaces!";
-		if (password.trim().length === 0) throw "Password cannot just be empty spaces!";
 
-		if (username.length < 3) throw "Username must be at least 3 characters long.";
-		if (password.length < 8) throw "Password must be at least 8 characters long.";
-		
+		if (username.trim().length === 0)
+			throw "Username cannot just be empty spaces!";
+		if (password.trim().length === 0)
+			throw "Password cannot just be empty spaces!";
+
+		if (username.length < 3)
+			throw "Username must be at least 3 characters long.";
+		if (password.length < 8)
+			throw "Password must be at least 8 characters long.";
+
 		for (x of username) {
 			if (x === " ") throw "Username cannot have spaces!";
 		}
@@ -137,9 +144,10 @@ let exportedMethods = {
 			if (x === " ") throw "Password cannot have spaces!";
 		}
 
-		var regEx = /^[0-9a-zA-Z]+$/; 
-		if (!username.match(regEx)) throw "Username must only contain alphanumeric characters!";
-		
+		var regEx = /^[0-9a-zA-Z]+$/;
+		if (!username.match(regEx))
+			throw "Username must only contain alphanumeric characters!";
+
 		// --------- finding user ----------
 		let usernameLower = username.toLowerCase();
 
@@ -159,16 +167,20 @@ let exportedMethods = {
 		return await { passwordUpdated: true };
 	},
 	async getUserBySearch(userSearched) {
-		if(!userSearched) throw "Search term is not provided.";
+		if (!userSearched) throw "Search term is not provided.";
 
 		const userCollection = await users();
+		let allUsers = await userCollection.find({}).toArray();
 
 		let usersFound = [];
-		for (x of data) {
-			usersFound.push(x);
+		for (x of allUsers) {
+			if (userSearched === x.userName) {
+				usersFound.push(x);
+			}
 		}
+
 		return usersFound;
-	}
+	},
 };
 
 module.exports = exportedMethods;

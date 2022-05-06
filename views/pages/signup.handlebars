@@ -1,22 +1,13 @@
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>SignUp</title>
-  </head>
-  <body>
-    <main class="page">
-      <h1>SignUp</h1>
+	<head>
+		<meta charset="utf-8" />
+		<title>SignUp</title>
+	</head>
+	<body>
+		<main class="page">
+			<h1>SignUp</h1>
 
 			<form action="/signup" method="POST" id="signup-form">
-				<div class="form__div">
-					<label for="profilePicture">Upload Profile Picture</label>
-					<input
-						type="file"
-						name="profile_picture"
-						id="profile_picture"
-						required
-					/>
-				</div>
 
 				<div class="form__div">
 					<label for="name">Name</label>
@@ -28,7 +19,7 @@
 						size="30"
 						minlength="3"
 						title="First Name should only include Alphanumeric Symbols. (Example: John)"
-						required 
+						required
 					/>
 					<input
 						type="text"
@@ -67,7 +58,6 @@
 						autocomplete="new-password"
 						size="30"
 						minlength="8"
-						<!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
 						title="Password should be 8 letters long with a symbol, number, and uppercase letter. (Example: passworD123!)"
 						required
 					/>
@@ -84,36 +74,36 @@
 					/>
 				</div>
 
-        <div class="form__div"><label for="email">Email</label>
-          <input
-            type="email"
-            name="userEmail"
-            id="userEmail"
-            placeholder="Email"
-            minlength="8"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-            required
-          />
-        </div>
+				<div class="form__div"><label for="email">Email</label>
+					<input
+						type="email"
+						name="userEmail"
+						id="userEmail"
+						placeholder="Email"
+						minlength="8"
+						pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+						required
+					/>
+				</div>
 
-        <div class="form__div">
-          <label for="date_of_birth">Date of Birth</label>
-          <input
-            type="date"
-            name="userDob"
-            id="userDob"
-            min="1900-01-01"
-            max="2002-01-01"
-            value="2022-01-01"
-            required
-          />
-        </div>
+				<div class="form__div">
+					<label for="date_of_birth">Date of Birth</label>
+					<input
+						type="date"
+						name="userDob"
+						id="userDob"
+						min="1900-01-01"
+						max="2002-01-01"
+						value="2022-01-01"
+						required
+					/>
+				</div>
 
-        <button type="submit">Sign Up</button>
-      </form>
+				<button type="submit">Sign Up</button>
+			</form>
 
-      <a class="loginSubhead" href="/login">Already have an account? Click here
-        to log-in</a>
-    </main>
-  </body>
+			<a class="loginSubhead" href="/login">Already have an account? Click here
+				to log-in</a>
+		</main>
+	</body>
 </html>

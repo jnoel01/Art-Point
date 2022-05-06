@@ -1,0 +1,26 @@
+<html lang="en">
+	<head>
+		<title>Create Art</title>
+	</head>
+	<body>
+		<main class="page">
+			<h2>Create Post</h2>
+			<form method="POST" action="/submit/submitArt">
+				<label for="file">Upload some art</label>
+				<input type="file" name="file" id="artInput" />
+				<label for="name">Name of Art</label>
+				<input type="text" name="artTitle" id="artTitle" />
+				<label for="description">What is this art about?</label>
+				<input type="text" name="description" id="description" />
+				<label for="typeGenre">What Genre is this</label>
+				<input type="text" name="typeGenre" id="typeGenre" />
+				<label for="forSale">Do you want to sell this?
+					<input type="checkbox" name="forSale" id="forSale" />
+				</label>
+				<label for="price">Price</label>
+				<input type="text" name="setPrice" id="salePrice" />
+				<input type="submit" name="submit" />
+			</form>
+		</main>
+	</body>
+</html>

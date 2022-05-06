@@ -91,6 +91,11 @@ footer {
 	height: 100%;
 	@include flex-container(column, flex-start, center, nowrap);
 }
+.inline {
+	* {
+		display: inline;
+	}
+}
 @import "./forms";
 @import "./layout";
 @import "./account";
