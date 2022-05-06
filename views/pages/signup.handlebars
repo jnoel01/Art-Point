@@ -12,7 +12,7 @@
 					<label for="profilePicture">Upload Profile Picture</label>
 					<input
 						type="file"
-						name="profilePicture"
+						name="profile_picture"
 						id="profile_picture"
 						required
 					/>
@@ -26,17 +26,17 @@
 						id="firstName"
 						placeholder="First Name"
 						size="30"
-						pattern="[A-Za-z]{3}"
+						minlength="3"
 						title="First Name should only include Alphanumeric Symbols. (Example: John)"
+						required 
 					/>
-					required />
 					<input
 						type="text"
 						name="lastName"
 						id="lastName"
 						placeholder="Last Name"
 						size="30"
-						pattern="[A-Za-z]{3}"
+						minlength="3"
 						title="Last Name should only include Alphanumeric Symbols. (Example: Smith)"
 						required
 					/>
@@ -46,12 +46,12 @@
 					<label for="username">Username</label>
 					<input
 						type="text"
-						name="username"
+						name="userName"
 						id="userName"
 						placeholder="Username"
+						autocomplete="username"
 						size="30"
 						minlength="3"
-						pattern="[A-Za-z]{3}"
 						title="Username should only include Alphanumeric Symbols. (Example: jSmith)"
 						required
 					/>
@@ -61,9 +61,10 @@
 					<label for="password">Password</label>
 					<input
 						type="password"
-						name="hashedPassword"
-						id="hashedPassword"
+						name="password"
+						id="password"
 						placeholder="Password"
+						autocomplete="new-password"
 						size="30"
 						minlength="8"
 						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -72,12 +73,12 @@
 					/>
 					<input
 						type="password"
-						name="hashedPassword2"
-						id="hashedPassword2"
+						name="password2"
+						id="password2"
 						placeholder="Re-enter Password"
+						autocomplete="new-password"
 						size="30"
 						minlength="8"
-						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 						title="Password should match and be 8 letters long with a symbol, number, and uppercase letter. (Example: passworD123!)"
 						required
 					/>

@@ -1,6 +1,5 @@
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
 		<title>Login</title>
 	</head>
 	<body>
@@ -14,9 +13,7 @@
 						name="username"
 						id="userName"
 						placeholder="Username"
-						size="30"
-						minlength="3"
-						pattern="[A-Za-z]{3}"
+						autocomplete="username"
 						required
 					/>
 				</div>
@@ -28,9 +25,7 @@
 						name="hashedPassword"
 						id="hashedPassword"
 						placeholder="Password"
-						size="30"
-						minlength="8"
-						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						autocomplete="current-password"
 						required
 					/>
 				</div>
