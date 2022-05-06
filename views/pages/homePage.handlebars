@@ -1,4 +1,42 @@
-<main>
-	<a href="/login">Login</a>
-	<h4>Home Feed</h4>
+<link href='https://unpkg.com/boxicons@2.1.2/dist/boxicons.js' rel='stylesheet'>
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+<main class="page">
+	<!-- introduction -->
+	<h1>Welcome to Art Point</h1>
+	<caption>Our purpose is to create a social media web application dedicated to users who are art enjoyers or artists. </caption>
+
+	<br>
+	<br>
+	<br>
+
+	<!-- search feature -->
+	<form method="POST" action="/searchUsers" id="search__form"></form>
+		<div class="search__box">
+			<button class="search__button"><i class='bx bx-search'></i></button>
+			<input type="text" name="userSearched" id="userSearched" class="search__input" placeholder="Search an Artist...">
+		</div>
+	</form>
+
+	<br>
+	<br>
+	<br>
+
+	<!-- search results -->
+	{{#if hasResults}}
+		<ul>
+			{{#each results}}
+				<li>
+					<a href="/shows/{{this.user.id}}">{{this.user.username}}</a>
+				</li>
+			{{/each}}
+		</ul>
+	{{else}}
+		<p class="user__not__found">No Results.</p>
+	{{/if}}
+
+	<!-- search again -->
+	<a href="/">Search Again.</a>
+
+	
 </main>
