@@ -1,12 +1,13 @@
 const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
 const { ObjectId } = require("mongodb");
-const { type } = require("express/lib/response");
+const { type, set } = require("express/lib/response");
 const { artItems } = require("../config/mongoCollections");
 const { artItem } = require(".");
 
 let exportedMethods = {
   async createArtItem(
+    userId,
     artTitle,
     forSale,
     setPrice,
@@ -16,13 +17,12 @@ let exportedMethods = {
     imageID
   ) {
     // checking user id
-    // if (!userId) throw "You must provide a user ID to search for";
-    // if (typeof userId !== "string") throw "User ID must be a string";
-    // if (userId.trim().length === 0) {
-    //   throw "User ID cannot be an empty string or just spaces";
-    // }
-    // userId = userId.trim();
-    // if (!ObjectId.isValid(userId)) throw "Invalid object User ID";
+    if (!userId) throw "You must provide a user ID to search for";
+    if (typeof userId !== "string") throw "User ID must be a string";
+    if (userId.trim().length === 0) {
+      throw "User ID cannot be an empty string or just spaces";
+    }
+    userId = userId.trim();
 
     // checking art title
     if (!artTitle) throw "You must provide a title for your art";
@@ -32,28 +32,29 @@ let exportedMethods = {
     }
     artTitle = artTitle.trim();
 
-    //checking forSale
-    // if (typeof forSale !== "boolean") throw "For sale must be bool";
-
-    //checking setPrice
-    // if (forSale == true) {
-    //   if (typeof setPrice !== "number") throw "Price must be a number";
-    //   if (setPrice < 0) throw "Price cannot be negative";
-    //   if (setPrice != setPrice.toFixed(2))
-    //     throw "Price must have 0-2 decimal places";
-    // } else {
-    //   setPrice = NULL;
-    // }
+    //checking forSale and setPrice
+    if (forSale == "on") {
+      //console.log(typeof setPrice);
+      if (!setPrice) throw "Must provide a price";
+      setPrice = parseFloat(setPrice);
+      if (typeof setPrice !== "number") throw "Price must be a number";
+      if (setPrice < 0) throw "Price cannot be negative";
+      if (setPrice != setPrice.toFixed(2))
+        throw "Price must have 0-2 decimal places";
+    } else {
+      setPrice = null;
+    }
 
     // checking rating
-    // if (!artRating) throw "You must provide a rating for your album";
-    // if (typeof artRating != "number") throw "Rating must be a number";
-    // if (artRating < 1 || artRating > 5) {
-    //   throw "artRating has to be between 1 and 5.";
-    // }
-    // if (artRating != artRating.toFixed(1)) {
-    //   throw "artRating must have 0 or 1 decimal places.";
-    // }
+    //console.log(artRating);
+    if (artRating == null) throw "You must provide a rating for your art";
+    if (typeof artRating != "number") throw "Rating must be a number";
+    if (artRating < 0 || artRating > 5) {
+      throw "artRating has to be between 0 and 5.";
+    }
+    if (artRating != artRating.toFixed(1)) {
+      throw "artRating must have 0 or 1 decimal places.";
+    }
 
     // checking genre
     if (!typeGenre) throw "You must provide a genre for your art";
@@ -68,7 +69,7 @@ let exportedMethods = {
     const artItemCollection = await artItems();
 
     let newArtItem = {
-      //userId: userId,
+      userId: userId,
       artTitle: artTitle,
       forSale: forSale,
       setPrice: setPrice,
