@@ -1,35 +1,35 @@
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>{{artTitle}}</title>
-	</head>
-	<body>
-		<main class="art-item">
-			<div class="img-container">
-				<img src="{{artImage}}" id="art-image" />
-			</div>
-			<div class="info">
-				<div class="std-card">
-					<h2>{{artTitle}}</h2>
-					<p>By {{artist}}</p>
-					<p>here is a super dope pic</p>
+  <head>
+    <meta charset="utf-8" />
+    <title>{{artTitle}}</title>
+  </head>
+  <body>
+    <main class="art-item">
+      <div class="img-container">
+        <img src="{{imageSource}}" id="art-image" />
+      </div>
+      <div class="info">
+        <div class="std-card">
+          <h2>{{artTitle}}</h2>
+          <p>By {{artist}}</p>
+          <p>here is a super dope pic</p>
 
-					<div class="sub-info">
-						<p>Rating: {{rating}}</p>
-						<p class="genre">{{typeGenre}}</p>
-					</div>
-				</div>
-				{{#if forSale}}
-					<div class="for-sale">
+          <div class="sub-info">
+            <p>Rating: {{artRating}}</p>
+            <p class="genre">{{typeGenre}}</p>
+          </div>
+        </div>
+        {{#if forSale}}
+          <div class="for-sale">
 
-						<h4>For Sale:</h4>
-						<p>${{setPrice}} USD</p>
-						<a href="{{purchasePage}}">Click here to purchase!</a>
-					</div>
-				{{/if}}
-				<h6>Comments:</h6>
-			</div>
+            <h4>For Sale:</h4>
+            <p>${{setPrice}} USD</p>
+            <a href="{{purchasePage}}">Click here to purchase!</a>
+          </div>
+        {{/if}}
+        <h6>Comments:</h6>
+      </div>
 
-		</main>
-	</body>
+    </main>
+  </body>
 </html>

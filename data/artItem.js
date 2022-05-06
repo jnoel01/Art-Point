@@ -6,7 +6,15 @@ const { artItems } = require("../config/mongoCollections");
 const { artItem } = require(".");
 
 let exportedMethods = {
-  async createArtItem(artTitle, forSale, setPrice, artRating, typeGenre) {
+  async createArtItem(
+    artTitle,
+    forSale,
+    setPrice,
+    artRating,
+    typeGenre,
+    imageSource,
+    imageID
+  ) {
     // checking user id
     // if (!userId) throw "You must provide a user ID to search for";
     // if (typeof userId !== "string") throw "User ID must be a string";
@@ -25,27 +33,27 @@ let exportedMethods = {
     artTitle = artTitle.trim();
 
     //checking forSale
-    if (typeof forSale !== "boolean") throw "For sale must be bool";
+    // if (typeof forSale !== "boolean") throw "For sale must be bool";
 
     //checking setPrice
-    if (forSale == true) {
-      if (typeof setPrice !== "number") throw "Price must be a number";
-      if (setPrice < 0) throw "Price cannot be negative";
-      if (setPrice != setPrice.toFixed(2))
-        throw "Price must have 0-2 decimal places";
-    } else {
-      setPrice = NULL;
-    }
+    // if (forSale == true) {
+    //   if (typeof setPrice !== "number") throw "Price must be a number";
+    //   if (setPrice < 0) throw "Price cannot be negative";
+    //   if (setPrice != setPrice.toFixed(2))
+    //     throw "Price must have 0-2 decimal places";
+    // } else {
+    //   setPrice = NULL;
+    // }
 
     // checking rating
-    if (!artRating) throw "You must provide a rating for your album";
-    if (typeof artRating !== "number") throw "Rating must be a number";
-    if (artRating < 1 || artRating > 5) {
-      throw "artRating has to be between 1 and 5.";
-    }
-    if (artRating != artRating.toFixed(1)) {
-      throw "artRating must have 0 or 1 decimal places.";
-    }
+    // if (!artRating) throw "You must provide a rating for your album";
+    // if (typeof artRating != "number") throw "Rating must be a number";
+    // if (artRating < 1 || artRating > 5) {
+    //   throw "artRating has to be between 1 and 5.";
+    // }
+    // if (artRating != artRating.toFixed(1)) {
+    //   throw "artRating must have 0 or 1 decimal places.";
+    // }
 
     // checking genre
     if (!typeGenre) throw "You must provide a genre for your art";
@@ -65,16 +73,19 @@ let exportedMethods = {
       forSale: forSale,
       setPrice: setPrice,
       artRating: artRating,
-      imageSource: "../public/no_image.jpeg",
+      imageSource: imageSource,
+      imageID: imageID,
       artComments: [],
       typeGenre: typeGenre,
     };
-
     const insertInfo = await artItemCollection.insertOne(newArtItem);
     if (!insertInfo.acknowledged || !insertInfo.insertedId)
       throw "Could not add art item";
 
     const newId = insertInfo.insertedId.toString();
+
+    const artItem = await this.getArtItemById(newId);
+    return artItem;
   },
 
   async getAllArtItems() {

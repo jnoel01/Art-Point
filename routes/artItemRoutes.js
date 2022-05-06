@@ -30,9 +30,10 @@ router.get("/:id", async (req, res) => {
     //   setPrice: art.setPrice,
     //   purchasePage: "../views/pages/purchaseItem",
     // });
+    console.log(art.imageSource);
     res.render("../views/pages/artItem", {
       artTitle: art.artTitle,
-      artImage: "../public/no_image.jpeg",
+      imageSource: art.imageSource,
       artist: "balls",
       artRating: art.artRating,
       typeGenre: art.typeGenre,
