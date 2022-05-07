@@ -9,6 +9,7 @@ let exportedMethods = {
 	async createArtItem(
 		userId,
 		artTitle,
+		artDescription,
 		forSale,
 		setPrice,
 		artRating,
@@ -31,7 +32,14 @@ let exportedMethods = {
 			throw "Title cannot be an empty string or string with just spaces";
 		}
 		artTitle = artTitle.trim();
-
+		// checking art description
+		if (!artDescription) throw "You must provide a description for your art";
+		if (typeof artDescription !== "string")
+			throw "Description must be a string";
+		if (artDescription.trim().length === 0) {
+			throw "Description cannot be an empty string or string with just spaces";
+		}
+		artDescription = artDescription.trim();
 		//checking forSale and setPrice
 		if (forSale == "on") {
 			//console.log(typeof setPrice);
@@ -71,6 +79,7 @@ let exportedMethods = {
 		let newArtItem = {
 			userId: userId,
 			artTitle: artTitle,
+			artDescription: artDescription,
 			forSale: forSale,
 			setPrice: setPrice,
 			artRating: artRating,

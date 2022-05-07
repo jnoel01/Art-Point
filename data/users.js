@@ -8,8 +8,7 @@ let exportedMethods = {
 		if (!userId) throw "Must provide a user id";
 		try {
 			let userCollection = await users();
-			let user = await userCollection.find({ _id: userId });
-			console.log("user", user);
+			let user = await userCollection.findOne({ _id: userId });
 			return user;
 		} catch (e) {
 			throw e;

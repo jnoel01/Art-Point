@@ -12,11 +12,12 @@
 				<div class="std-card">
 					<h2>{{artTitle}}</h2>
 					<p>By {{artist}}</p>
-					<p>here is a super dope pic</p>
+					<p>{{artDescription}}</p>
 
 					<div class="sub-info">
 						<p>Rating: {{artRating}}</p>
-						<form method="POST" action="/item/rateArt">
+						<form id="rating-form" method="POST" action="/item/rateArt">
+							<input type="hidden" name="artId" value="{{artId}}" />
 							<label for="rating">Rate this art</label>
 							<select id="rating" name="rating">
 								<option value="0">0</option>
