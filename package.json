@@ -19,6 +19,7 @@
 	},
 	"homepage": "https://github.com/jnoel01/Art-Point#readme",
 	"dependencies": {
+		"ajax": "^0.0.4",
 		"bcrypt": "^5.0.1",
 		"boxicons": "^2.1.2",
 		"cloudinary": "^1.29.1",

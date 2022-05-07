@@ -51,7 +51,7 @@ li {
 }
 header {
 	background-color: var.$fg;
-	height: 5rem;
+	height: 4rem;
 	padding: 1rem;
 	@include flex-container(row, flex-end, center, nowrap);
 	.mainHeader {

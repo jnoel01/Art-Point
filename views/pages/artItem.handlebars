@@ -11,11 +11,24 @@
       <div class="info">
         <div class="std-card">
           <h2>{{artTitle}}</h2>
-          <p>By {{artist}}</p>
-          <p>here is a super dope pic</p>
+          <p>By @{{artist}}</p>
+          <p>{{artDescription}}</p>
 
           <div class="sub-info">
             <p>Rating: {{artRating}}</p>
+            <form id="rating-form" method="POST" action="/item/rateArt">
+              <input type="hidden" name="artId" value="{{artId}}" />
+              <label for="rating">Rate this art</label>
+              <select id="rating" name="rating">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              <input type="submit" value="submit" />
+            </form>
             <p class="genre">{{typeGenre}}</p>
           </div>
         </div>

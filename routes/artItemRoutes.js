@@ -2,6 +2,7 @@ const express = require("express");
 const session = require("express-session");
 const router = express.Router();
 const data = require("../data");
+const userData = data.users;
 const artItemApi = require("../data/artItem");
 
 const { ObjectId } = require("mongodb");
@@ -26,11 +27,15 @@ router.get("/:id", async (req, res) => {
   //console.log(artId);
   try {
     let art = await artItemApi.getArtItemById(artId);
+    let artist = await userData.getUser(ObjectId(art.userId));
+    req.session.artId = art._id;
     res.render("../views/pages/artItem", {
       artTitle: art.artTitle,
+      artDescription: art.artDescription,
       imageSource: art.imageSource,
-      artist: "balls",
+      artist: artist.userName,
       artRating: art.artRating,
+      artId: art._id,
       typeGenre: art.typeGenre,
       forSale: art.forSale,
       setPrice: art.setPrice,
@@ -45,11 +50,12 @@ router.post("/submitart", upload.single("image"), async (req, res) => {
   //console.log("inside submit art");
   try {
     let artSubmissionInfo = req.body;
-    //console.log("user" + req.session.user);
     const result = await cloudinary.uploader.upload(req.file.path);
+
     const newArtSubmission = await artItemApi.createArtItem(
-      req.session.user,
+      req.session.userId,
       artSubmissionInfo.artTitle,
+      artSubmissionInfo.artDescription,
       artSubmissionInfo.forSale,
       artSubmissionInfo.setPrice,
       0,
@@ -62,8 +68,19 @@ router.post("/submitart", upload.single("image"), async (req, res) => {
   } catch (e) {
     //console.log("hi");
     //console.log(e);
-    res.status(400).json({ error: e });
+    res.status(400).render("../views/pages/error", { error: e });
   }
 });
-
+router.post("/rateArt", async (req, res) => {
+  try {
+    let newRating = req.body.rating;
+    let artId = req.body.artId;
+    //todo: get item id from form
+    console.log(artId);
+    console.log(newRating);
+    let update = await artItemApi.updateRating(newRating, artId);
+  } catch (e) {
+    res.json(e);
+  }
+});
 module.exports = router;

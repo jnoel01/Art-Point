@@ -11,8 +11,10 @@
 	<!-- introduction -->
 	<h1>Welcome to Art Point</h1>
 	<caption>
-		Our purpose is to create a social media web application dedicated to users
-		who are art enjoyers or artists.
+		<p>
+			Our purpose is to create a social media web application dedicated to users
+			who are art enjoyers or artists.
+		</p>
 	</caption>
 
 	<br />
@@ -55,5 +57,12 @@
 
 	<!-- search again -->
 	<a href="/">Search Again.</a>
-
+	<h2>Art</h2>
+	{{#each artItems}}
+		<li>
+			<a href="/item/{{this._id}}">
+				<img src="{{this.imageSource}}" alt="{{this.artTitle}}" />
+			</a>
+		</li>
+	{{/each}}
 </main>
