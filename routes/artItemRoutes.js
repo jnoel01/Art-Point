@@ -23,6 +23,7 @@ const upload = require("../utils/multer");
 //   });
 // });
 router.get("/:id", async (req, res) => {
+<<<<<<< HEAD
   let artId = req.params.id;
   //console.log(artId);
   try {
@@ -42,6 +43,27 @@ router.get("/:id", async (req, res) => {
   } catch (e) {
     res.render("../views/pages/error", { error: e });
   }
+=======
+	let artId = req.params.id;
+	//console.log(artId);
+	try {
+		let art = await artItemApi.getArtItemById(artId);
+		console.log(ObjectId(art.userId));
+		let artist = await userData.getUser(art.userId);
+		res.render("../views/pages/artItem", {
+			artTitle: art.artTitle,
+			imageSource: art.imageSource,
+			artist: artist.userName,
+			artRating: art.artRating,
+			typeGenre: art.typeGenre,
+			forSale: art.forSale,
+			setPrice: art.setPrice,
+			purchasePage: "../views/pages/purchaseItem",
+		});
+	} catch (e) {
+		res.render("../views/pages/error", { error: e });
+	}
+>>>>>>> 5389667ecae5bc00e0ff79c7e6fcd9db300aeb7b
 });
 
 router.post("/submitart", upload.single("image"), async (req, res) => {
