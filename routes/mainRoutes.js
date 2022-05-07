@@ -255,7 +255,11 @@ router.post("/home", async (req, res) => {
 });
 
 router.get("/create", async (req, res) => {
+  //if (req.session.user) {
   res.render("../views/pages/create");
+  //} else {
+  // res.status(401).render("../views/pages/login");
+  //}
 });
 
 router.get("/support", async (req, res) => {
