@@ -266,8 +266,8 @@ router.get("/support", async (req, res) => {
   res.render("../views/pages/support");
 });
 
-router.get("/about", async (req, res) => {
-  res.render("../views/pages/about");
+router.get("/aboutUs", async (req, res) => {
+  res.render("../views/pages/aboutUs");
 });
 
 module.exports = router;
