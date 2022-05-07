@@ -4,6 +4,17 @@ const bcrypt = require("bcrypt");
 const { ObjectId } = require("mongodb");
 
 let exportedMethods = {
+	async getUser(userId) {
+		console.log(userId);
+		if (!userId) throw "Must provide a user id";
+		try {
+			let userCollection = await users();
+			let user = await userCollection.find({ _id: userId });
+			return user;
+		} catch (e) {
+			throw e;
+		}
+	},
 	async createUser(userName, password, firstName, lastName, email, dob) {
 		const userCollection = await users();
 
@@ -116,10 +127,13 @@ let exportedMethods = {
 			password,
 			userToCheck.hashedPassword
 		);
-		if (checkPassword) return { authenticated: true };
+		let id = userToCheck._id;
+		id = ObjectId(id);
+		if (checkPassword) return { authenticated: true, userId: id };
 
 		throw "Either the username or password is invalid";
 	},
+
 	async resetPassword(username, password) {
 		const userCollection = await users();
 

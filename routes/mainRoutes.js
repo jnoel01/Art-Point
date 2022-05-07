@@ -4,7 +4,7 @@ const res = require("express/lib/response");
 const router = express.Router();
 const data = require("../data");
 const userData = data.users;
-
+const artData = data.artItem;
 router.get("/", async (req, res) => {
 	if (req.session.user) {
 		res.redirect("/account");
@@ -140,6 +140,7 @@ router.post("/login", async (req, res) => {
 		);
 		if (checkUser.authenticated) {
 			req.session.user = req.body.username;
+			req.session.userId = checkUser.userId;
 			res.redirect("/account");
 		} else {
 			throw "Your username / password is invalid!";
@@ -225,7 +226,14 @@ router.post("/passwordReset", async (req, res) => {
 });
 
 router.get("/home", async (req, res) => {
-	res.render("../views/pages/homePage");
+	try {
+		let artItems = await artData.getAllArtItems();
+		console.log(artItems);
+		res.render("../views/pages/homePage", { artItems: artItems });
+	} catch (e) {
+		console.log(e);
+		res.json(e);
+	}
 });
 
 router.post("/home", async (req, res) => {
