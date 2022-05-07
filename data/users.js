@@ -5,11 +5,11 @@ const { ObjectId } = require("mongodb");
 
 let exportedMethods = {
 	async getUser(userId) {
-		console.log(userId);
 		if (!userId) throw "Must provide a user id";
 		try {
 			let userCollection = await users();
 			let user = await userCollection.find({ _id: userId });
+			console.log("user", user);
 			return user;
 		} catch (e) {
 			throw e;

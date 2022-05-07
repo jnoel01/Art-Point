@@ -27,8 +27,8 @@ router.get("/:id", async (req, res) => {
 	//console.log(artId);
 	try {
 		let art = await artItemApi.getArtItemById(artId);
+		console.log(ObjectId(art.userId));
 		let artist = await userData.getUser(art.userId);
-		console.log(artist);
 		res.render("../views/pages/artItem", {
 			artTitle: art.artTitle,
 			imageSource: art.imageSource,
