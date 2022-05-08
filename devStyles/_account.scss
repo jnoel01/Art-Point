@@ -1,0 +1,22 @@
+@use "./var";
+@use "./mixins";
+
+.account-details {
+	padding: 1rem 2rem;
+	@include flex-container(column, center, center, nowrap);
+}
+.profile-pic {
+	height: 4rem;
+	width: 4rem;
+	border-radius: 50%;
+}
+
+.not-for-sale {
+	margin-top: 0.2in;
+}
+
+.userInfo {
+	padding: 1rem 2rem;
+	@include flex-container(column, center, left, nowrap);
+	margin-left: 0.8in;;
+}

@@ -1,26 +1,115 @@
-<!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>SignUp</title>
+	</head>
+	<body>
+		<main class="page">
+			<h1>SignUp</h1>
 
-<head>
-    <meta charset = "utf-8">
-    <title>Signup</title>
-</head>
-<body>
-    <main>
-        <h1>Signup</h1>
-        <form action="/signup" method = "POST" id="signup-form">
-            <label for = "username">Username</label>
-            <input id = "username" name = "username">
-            <label for = "password">Password</label>
-            <input id = "password" name = "password">
-            <button type = "submit">Sign Up</button>
-        </form>
-        <div class = "error"> 
-            {{#if error}}
-                <p>{{error}}</p>
-            {{/if}}
-        </div>
-        <a href="/login">Already have an account? Click here to log-in</a>
-    </main>
-</body>
+			<form action="/signup" method="POST" id="signup-form">
+
+				<div class="form__div">
+					<label for="name">Name</label>
+					<input
+						type="text"
+						name="firstName"
+						id="firstName"
+						placeholder="First Name"
+						size="30"
+						minlength="3"
+						pattern="[A-Z][a-z]"
+						title="First Name should only include Alphanumeric Symbols. (Example: John)"
+						required
+					/>
+					<input
+						type="text"
+						name="lastName"
+						id="lastName"
+						placeholder="Last Name"
+						size="30"
+						minlength="3"
+						pattern="[A-Z][a-z]"
+						title="Last Name should only include Alphanumeric Symbols. (Example: Smith)"
+						required
+					/>
+				</div>
+
+				<div class="form__div">
+					<label for="username">Username</label>
+					<input
+						type="text"
+						name="userName"
+						id="userName"
+						placeholder="Username"
+						autocomplete="username"
+						size="30"
+						minlength="3"
+						title="Username should only include Alphanumeric Symbols. (Example: jSmith)"
+						required
+					/>
+				</div>
+
+				<div class="form__div">
+					<label for="password">Password</label>
+					<input
+						type="password"
+						name="password"
+						id="password"
+						placeholder="Password"
+						autocomplete="new-password"
+						size="30"
+						minlength="8"
+						title="Password should be 8 letters long with a symbol, number, and uppercase letter. (Example: passworD123!)"
+						required
+					/>
+					<input
+						type="password"
+						name="password2"
+						id="password2"
+						placeholder="Re-enter Password"
+						autocomplete="new-password"
+						size="30"
+						minlength="8"
+						title="Password should match and be 8 letters long with a symbol, number, and uppercase letter. (Example: passworD123!)"
+						required
+					/>
+				</div>
+
+				<div class="form__div"><label for="email">Email</label>
+					<input
+						type="email"
+						name="userEmail"
+						id="userEmail"
+						placeholder="Email"
+						minlength="8"
+						pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+						required
+					/>
+				</div>
+
+				<div class="form__div">
+					<label for="date_of_birth">Date of Birth</label>
+					<input
+						type="date"
+						name="userDob"
+						id="userDob"
+						min="1900-01-01"
+						max="2002-01-01"
+						value="2022-01-01"
+						required
+					/>
+				</div>
+
+				<button type="submit">Sign Up</button>
+			</form>
+
+			{{#if error}}<div class="error__message">{{error}}</div>{{/if}}
+
+			<br>
+
+			<a class="loginSubhead" href="/login">Already have an account? Click here
+				to log-in</a>
+		</main>
+	</body>
 </html>

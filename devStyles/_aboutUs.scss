@@ -1,0 +1,85 @@
+/*ABOUT US */
+
+.wrapper{
+margin-top: 50px;
+}
+
+.wrapper h3{
+font-size: 52px;
+text-align: left;
+}
+
+.team{
+display: flex;
+justify-content: center;
+width: auto;
+text-align: center;
+}
+
+.team .person{
+margin: 5px;
+margin-bottom: 50px;
+width: 300px;
+padding: 20px;
+line-height: 20px;
+position: relative;
+}
+
+.team-member{
+    margin-top: 0.8in;
+    padding-bottom: 0.2in;
+}
+
+.gitimg{
+top: -50px;
+left: 50%;
+position: absolute;
+transform: translateX(-50%);
+padding: 5px;
+}
+
+.aboutText {
+    font-size: 12px;
+    background-color: rgb(248, 220, 225);
+    border-radius: 25px;
+    box-shadow: 1px 1px 3px 3px rgba(127, 127, 127, 0.15);
+    padding: 10px;
+    top: 100px;
+    left: 50%;
+    margin-bottom: 30px;;
+}
+
+.team .person .gitimg img{
+width: 150px;
+height: 150px;
+padding: 20px;
+border-radius: 40%;
+}
+
+.purpose {
+    margin-left: 0.5in;
+    padding: 10px 16px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 5px solid #292f36;
+    color:#000;
+    background-color:rgb(249, 237, 239);
+    max-width: 900px;
+    border-radius: 25px;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.titlePurp {
+    margin-left: 0.5in;
+}
+  
+#aboutPic{
+    height: 2in;
+    width: 4.5in;
+    border-radius: 40px;
+    display: flex;
+    display: block;
+    margin-left: auto;
+    margin-right: 25px;
+    margin-top: -200px;
+}

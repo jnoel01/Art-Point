@@ -1,15 +1,94 @@
-<!DOCTYPE html>
-<html lang = "en">
-<head>
-    <meta charset = "utf-8">
-    <link rel="stylesheet" href="/public/css/styles.css">
-</head>
-<body>
-    <header>
-        <h1 class="mainHeader">Art Point</h1>
-    </header>
-    <main>
-        {{{body}}}
-    </main>
-</body>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!--                        links                            -->
+		<link title="Main CSS" rel="stylesheet" href="/public/css/styles.css" />
+		<link
+			title="Font Icons"
+			rel="stylesheet"
+			href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+		/>
+		<link
+			href="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+			rel="stylesheet"
+		/>
+		<!--                        scripts                            -->
+		<script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+
+	</head>
+	<body>
+		<header>
+			<a href="/home" class = "mainHeader accent"><h6 class="mainHeader accent">Art Point</h6></a>
+	
+			<div class="icon__container">
+				<a href="#" class="search__link">
+					<form method="POST" action="/home" id="search__form">
+						<div class="">
+							<input
+								type="text"
+								name="userSearched"
+								id="userSearched"
+								class="search__input"
+								placeholder="Search an Artist..."
+							/>
+						</div>
+					</form>
+				</a>
+				<a href="#search__form" onClick="myFunction()"/>
+				<script>
+				function myFunction() {
+					document.getElementById('search__form').submit();
+				}
+				</script>
+					<box-icon
+						name="search-alt"
+						animation="tada-hover"
+					></box-icon>
+				</a>
+				<a href="/home"><box-icon
+						name="home"
+						animation="tada-hover"
+					></box-icon></a>
+				<a href="/create"><box-icon
+						name="image-add"
+						animation="tada-hover"
+					></box-icon></a>
+				<a href="/account"><box-icon
+						name="user"
+						animation="tada-hover"
+					></box-icon></a>
+			</div>
+
+		</header>
+
+		<main>
+			<div id="app-container">
+				{{{body}}}
+			</div>
+		</main>
+
+		<footer>
+			<div class="social__container">
+				<a>© ArtPoint Inc. 2022</a>
+			</div>
+
+
+			<div class="nav__container">
+				<a href="/aboutUs" class="page__item">About</a>
+				<a href="/support" class="page__item">Support</a>
+				<a href="/logout" class="page__item">Logout</a>
+			</div>
+		</footer>
+		<script
+			src="https://code.jquery.com/jquery-2.2.4.min.js"
+			crossorigin="anonymous"
+		></script>
+		<script src="/public/js/updateArtRating.js"></script>
+
+	</body>
 </html>

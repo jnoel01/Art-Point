@@ -1,15 +1,66 @@
-<!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 
-<head>
-    <meta charset = "utf-8">
-    <title>Lab 10</title>
-</head>
-<body>
-    <main>
-        <h1>Private (Shhh)</h1>
-        <p>Your user name is: {{username}} </p>
-        <a href = "/logout">Click here to logout</a>
-    </main>
-</body>
+	<head>
+		<meta charset="utf-8" />
+		<title>{{user.userName}}</title>
+	</head>
+	<body>
+		<main class="account page two-column">
+			<div class="left top">
+				<div class="post-container">
+				<div class="account-details standard-card">
+					<img
+						class="profile-pic"
+						alt="profile picture"
+						src="https://i.imgur.com/0LpVMsK.png"/>
+					<h6 class="accent">{{user.userName}}</h6>
+
+					<div class="userInfo">
+						<p>{{user.firstName}} {{user.lastName}}</p>
+						<p>{{user.userDob}}</p>
+						<p>{{user.userEmail}}</p>
+					</div>
+
+
+				</div>
+
+				<h4>For Sale</h4>
+				{{#each forSaleItems}}
+				<div class="post" href="/item/{{this._id}}">
+						<a href="/item/{{this._id}}">
+							<img src="{{this.imageSource}}" alt="{{this.artTitle}}" />
+						</a>
+
+						<div class="details">
+							<h5>Title: {{this.artTitle}}</h5>
+							<h6>Artist: {{this.artist}}</h6>
+							<p>Description: {{this.artDescription}}</p>
+						</div>
+					</div>
+				{{/each}}
+				</div>
+
+			</div>
+			<div class="right bottom">
+			
+
+				<div class="post-container" class="account-container">
+					<h4 class="not-for-sale">Not For Sale</h4>
+					{{#each notForSaleItems}}
+					<div class="post" href="/item/{{this._id}}">
+						<a href="/item/{{this._id}}">
+							<img src="{{this.imageSource}}" alt="{{this.artTitle}}" />
+						</a>
+
+						<div class="details">
+							<h5>Title: {{this.artTitle}}</h5>
+							<h6>Artist: {{this.artist}}</h6>
+							<p >Description: {{this.artDescription}}</p>
+						</div>
+					</div>
+					{{/each}}
+				</div>
+			</div>
+		</main>
+	</body>
 </html>

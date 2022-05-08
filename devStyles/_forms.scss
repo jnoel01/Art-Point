@@ -1,0 +1,33 @@
+@use "./var";
+button {
+	background: none;
+	color: inherit;
+	border: none;
+	cursor: pointer;
+	outline: inherit;
+	text-align: center;
+	padding: 0.5rem 1rem;
+	border-radius: 0.25rem;
+	background-color: var.$primary-dark;
+	color: var.$bg;
+	font-size: 1.5rem;
+}
+input {
+	border: 1px solid var.$border;
+	background-color: #eeeeee;
+	color: var.$text;
+	padding: 0.4rem 1rem;
+	font-size: 1.5rem;
+	border-radius: 0.25rem;
+}
+form {
+	width: min(100%, 40rem);
+	input {
+		margin: 0.5rem 0;
+		width: 100%;
+	}
+	button {
+		margin: 1rem auto;
+		width: 100%;
+	}
+}

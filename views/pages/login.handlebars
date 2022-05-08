@@ -1,25 +1,43 @@
-<!DOCTYPE html>
-<html lang = "en">
-<head>
-    <meta charset = "utf-8">
-    <title>Login</title>
-</head>
-<body>
-    <main>
-        <h1>Login</h1>
-        <form action="/login" method = "POST" id="login-form">
-            <label for = "username">Username</label>
-            <input id = "username" name = "username">
-            <label for = "password">Password</label>
-            <input id = "password" name = "password">
-            <button type = "submit">Log In</button>
-        </form>
-        <div class = "error"> 
-            {{#if error}}
-                <p>{{error}}</p>
-            {{/if}}
-        </div>
-        <a href="/signup">Need to register? Click here to sign-up</a>
-    </main>
-</body>
+<html lang="en">
+	<head>
+		<title>Login</title>
+	</head>
+	<body>
+		<main class="page">
+			<h1>Login</h1>
+			<form action="/login" method="POST" id="login-form">
+				<div class="form__div">
+					<label for="username">Username</label>
+					<input
+						type="text"
+						name="username"
+						id="userName"
+						placeholder="Username"
+						autocomplete="username"
+						required
+					/>
+				</div>
+
+				<div class="form__div">
+					<label for="password">Password</label>
+					<input
+						type="password"
+						name="password"
+						id="password"
+						placeholder="Password"
+						autocomplete="current-password"
+						required
+					/>
+				</div>
+
+				<button type="submit" class="block">Log In</button>
+			</form>
+
+			{{#if error}}<div class="error__message">{{error}}</div>{{/if}}
+
+			<a class="loginSubhead" href="/signup">Need to register? Click here to
+				sign-up</a>
+			<a class="loginSubhead" href="/passwordReset">Forgot Password? Click Here!</a>
+		</main>
+	</body>
 </html>
