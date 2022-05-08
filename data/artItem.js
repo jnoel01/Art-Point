@@ -122,5 +122,11 @@ let exportedMethods = {
 
 		return artItem;
 	},
+	async updateRating(artId, rating) {
+		const artCollection = await artItems();
+		const artItem = await artCollection.findOne({ _id: artId });
+		let currentRating = artItem.rating;
+		console.log("current rating:", currentRating);
+	},
 };
 module.exports = exportedMethods;
