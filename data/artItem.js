@@ -122,7 +122,7 @@ let exportedMethods = {
 
 		return artItem;
 	},
-	async getArtByUser(id){
+	async getArtByUser(id) {
 		if (!id) throw "You must provide an id to search for";
 		if (typeof id !== "string") throw "Id must be a string";
 		if (id.trim().length === 0)
@@ -130,8 +130,14 @@ let exportedMethods = {
 		id = id.trim();
 		if (!ObjectId.isValid(id)) throw "Invalid object ID";
 		const artCollection = await artItems();
-		const userArtItems = await artCollection.find({ userId: id}).toArray();
+		const userArtItems = await artCollection.find({ userId: id }).toArray();
 		return userArtItems;
-	}
+	},
+	async updateRating(artId, rating) {
+		const artCollection = await artItems();
+		const artItem = await artCollection.findOne({ _id: artId });
+		let currentRating = artItem.rating;
+		console.log("current rating:", currentRating);
+	},
 };
 module.exports = exportedMethods;
