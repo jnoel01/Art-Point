@@ -84,7 +84,6 @@ router.post("/submitart", upload.single("image"), async (req, res) => {
     }
     artSubmissionInfo.artDescription = artSubmissionInfo.artDescription.trim();
 
-<<<<<<< Updated upstream
     //checking forSale and setPrice
     if (artSubmissionInfo.forSale === "on") {
       artSubmissionInfo.setPrice = parseFloat(artSubmissionInfo.setPrice);
@@ -99,39 +98,6 @@ router.post("/submitart", upload.single("image"), async (req, res) => {
         });
         return;
       }
-=======
-		console.log(artSubmissionInfo.forSale);
-
-		//checking forSale and setPrice
-		if (artSubmissionInfo.forSale) {
-			if (!artSubmissionInfo.setPrice) {
-				res.status(400).render("../views/pages/create", {
-					error: "Must provide a price",
-				});
-				return;
-			}
-			artSubmissionInfo.setPrice = parseFloat(artSubmissionInfo.setPrice);
-			
-			if (typeof artSubmissionInfo.setPrice !== "number") {
-				res.status(400).render("../views/pages/create", {
-					error: "Price must be a number",
-				});
-				return;
-			}
-			if (artSubmissionInfo.setPrice < 0) {
-				res.status(400).render("../views/pages/create", {
-					error: "Price cannot be negative",
-				});
-				return;
-			}
-			if (artSubmissionInfo.setPrice != artSubmissionInfo.setPrice.toFixed(2)) {
-				res.status(400).render("../views/pages/create", {
-					error: "Price must have 0-2 decimal places",
-				});
-				return;
-			}
-		}
->>>>>>> Stashed changes
 
       if (typeof artSubmissionInfo.setPrice !== "number") {
         res.status(400).render("../views/pages/create", {
@@ -174,7 +140,6 @@ router.post("/submitart", upload.single("image"), async (req, res) => {
 
     const result = await cloudinary.uploader.upload(req.file.path);
 
-<<<<<<< Updated upstream
     const newArtSubmission = await artItemApi.createArtItem(
       req.session.userId,
       artSubmissionInfo.artTitle,
@@ -193,48 +158,6 @@ router.post("/submitart", upload.single("image"), async (req, res) => {
     //console.log(e);
     res.status(400).render("../views/pages/error", { error: e });
   }
-=======
-		if (!artSubmissionInfo.typeGenre) {
-			res.status(400).render("../views/pages/create", {
-				error: "You must provide a genre for your art",
-			});
-			return;
-		}
-		if (typeof artSubmissionInfo.typeGenre !== "string") {
-			res.status(400).render("../views/pages/create", {
-				error: "Genre must be a string",
-			});
-			return;
-		}
-		if (artSubmissionInfo.typeGenre.trim().length === 0) {
-			res.status(400).render("../views/pages/create", {
-				error: "Genre cannot be an empty string or string with just spaces",
-			});
-			return;
-		}
-		artSubmissionInfo.typeGenre = artSubmissionInfo.typeGenre.trim();
-
-		const result = await cloudinary.uploader.upload(req.file.path);
-
-		const newArtSubmission = await artItemApi.createArtItem(
-			req.session.userId,
-			artSubmissionInfo.artTitle,
-			artSubmissionInfo.artDescription,
-			artSubmissionInfo.forSale,
-			artSubmissionInfo.setPrice,
-			0,
-			artSubmissionInfo.typeGenre,
-			result.secure_url,
-			result.public_id
-		);
-		//console.log(newArtSubmission);
-		res.status(200).redirect("/item/" + newArtSubmission._id);
-	} catch (e) {
-		//console.log("hi");
-		console.log(e);
-		res.status(400).render("../views/pages/error", { error: e });
-	}
->>>>>>> Stashed changes
 });
 router.post("/rateArt", async (req, res) => {
   try {
