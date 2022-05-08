@@ -63,7 +63,7 @@ router.post("/signup", async (req, res) => {
       throw "Email URL cannot just be empty spaces!";
 
     // ------------- checks if strings have unwanted characters --------
-    var regEx = /^[a-zA-Z0-9]$/;
+    var regEx = /^[0-9a-zA-Z]+$/;
     if (!req.body.userName.match(regEx))
       throw "Username must only contain alphanumeric characters!";
     if (!req.body.firstName.match(regEx))
