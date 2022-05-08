@@ -19,24 +19,19 @@
 			<div class="right bottom">
 				<h2>{{username}}'s Art</h2>
 				<div class="post-container">
-					<div class="post">
-						<img src="{{imageSource}}" alt="art-image" />
+					{{#each artItems}}
+					
+					<div class="post" href="/item/{{this._id}}">
+						<img src="{{this.imageSource}}" alt="art-image" />
 						<div class="details">
-							<h6>{{artTitle}}</h6>
-							<h7>{{artist}}</h7>
-							<p>{{artDescription}}</p>
-
-
+							<h6>{{this.artTitle}}</h6>
+							<h7>{{this.artist}}</h7>
+							<p>{{this.artDescription}}</p>
 						</div>
 					</div>
-					<div class="post">
-						<img src="/public/no_image.jpeg" alt="picture of art" />
-						<div class="details">
-							<h6>Art Name</h6>
-							<p>Artist Name</p>
-
-						</div>
-					</div>
+					{{/each}}
+					
+					
 				</div>
 			</div>
 		</main>

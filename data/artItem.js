@@ -122,5 +122,16 @@ let exportedMethods = {
 
 		return artItem;
 	},
+	async getArtByUser(id){
+		if (!id) throw "You must provide an id to search for";
+		if (typeof id !== "string") throw "Id must be a string";
+		if (id.trim().length === 0)
+			throw "Id cannot be an empty string or just spaces";
+		id = id.trim();
+		if (!ObjectId.isValid(id)) throw "Invalid object ID";
+		const artCollection = await artItems();
+		const userArtItems = await artCollection.find({ userId: id}).toArray();
+		return userArtItems;
+	}
 };
 module.exports = exportedMethods;

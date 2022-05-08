@@ -3,6 +3,7 @@ const session = require("express-session");
 const res = require("express/lib/response");
 const router = express.Router();
 const data = require("../data");
+const {ObjectId} = require("mongodb");
 const userData = data.users;
 const artData = data.artItem;
 router.get("/", async (req, res) => {
@@ -13,7 +14,13 @@ router.get("/", async (req, res) => {
     return;
   }
 });
-
+router.get("/account", async (req, res)=> {
+  if (req.session.userId){
+    res.redirect(`/account/${req.session.userId}`);
+  }else{
+    res.redirect("/login")
+  }
+})
 router.get("/login", async (req, res) => {
   if (req.session.user) {
     res.redirect("/account");
@@ -141,7 +148,7 @@ router.post("/login", async (req, res) => {
     if (checkUser.authenticated) {
       req.session.user = req.body.username;
       req.session.userId = checkUser.userId;
-      res.redirect("/account");
+      res.redirect(`/account/${checkUser.userId}`);
     } else {
       throw "Your username / password is invalid!";
     }
@@ -152,9 +159,23 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/account", async (req, res) => {
+router.get("/account/:userId", async (req, res) => {
   if (req.session.user) {
-    res.render("../views/pages/account", { username: req.session.user });
+    console.log("req.session.user:", req.session.user)
+    try {
+      console.log("id", req.session.userId)
+      let userId = ObjectId(req.session.userId)
+      let user = await userData.getUser(userId);
+      // add get user art
+      let artItems = await artData.getArtByUser(req.session.userId)
+      console.log("artItems:", artItems)
+      res.render("../views/pages/account", { username: user.userName, artItems: artItems});
+    } catch (e) {
+      console.log(e);
+      res.json(e)
+      // res.status(400).render(`../account/${userId}`, { error: e });
+      return;
+    }
   } else {
     e = "Please login with a valid username and password!";
     res.status(401).render("../views/pages/login", { e });
@@ -238,7 +259,6 @@ router.get("/home", async (req, res) => {
 
 router.post("/home", async (req, res) => {
   let userSearchTerm = req.body.userSearched.trim();
-  console.log("hello");
 
   if (!userSearchTerm) {
     res.status(400).render("/", { error: "Search term is empty." });
