@@ -2,7 +2,7 @@
 
 	<head>
 		<meta charset="utf-8" />
-		<title>{{username}}</title>
+		<title>{{user.userName}}</title>
 	</head>
 	<body>
 		<main class="account page two-column">
@@ -11,22 +11,33 @@
 					<img
 						class="profile-pic"
 						alt="profile picture"
-						src="https://i.imgur.com/0LpVMsK.png"
-					<h6 class="accent">{{username}}</h6>
+						src="https://i.imgur.com/0LpVMsK.png"/>
+					<h6 class="accent">{{user.userName}}</h6>
+
+					<div class="userInfo">
+						<p>{{user.firstName}} {{user.lastName}}</p>
+						<p>{{user.userDob}}</p>
+						<p>{{user.userEmail}}</p>
+					</div>
 
 				</div>
 			</div>
 			<div class="right bottom">
-				<h2>{{username}}'s Art</h2>
+				<h2>{{user.userName}}'s Art</h2>
+				<button>See For Purchase</button>
+				<button>See All</button>
 				<div class="post-container">
 					{{#each artItems}}
 					
 					<div class="post" href="/item/{{this._id}}">
-						<img src="{{this.imageSource}}" alt="art-image" />
+						<a href="/item/{{this._id}}">
+							<img src="{{this.imageSource}}" alt="{{this.artTitle}}" />
+						</a>
+
 						<div class="details">
-							<h6>{{this.artTitle}}</h6>
-							<h7>{{this.artist}}</h7>
-							<p>{{this.artDescription}}</p>
+							<h5>Title: {{this.artTitle}}</h5>
+							<h6>Artist: {{this.artist}}</h6>
+							<p>Description: {{this.artDescription}}</p>
 						</div>
 					</div>
 					{{/each}}

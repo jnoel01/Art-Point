@@ -1,13 +1,21 @@
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>{{artTitle}}</title>
-  </head>
-  <body>
-    <main>
-      <div>
-        <p>you are buying some art</p>
-      </div>
-    </main>
-  </body>
-</html>
+	<head>
+		<title>PurchasePage</title>
+	</head>
+	<body>
+
+        <h1>You are purchasing {{this.artTitle}} made by {{username}} </h1>
+        <div> Please fill out the information to purchase. </div>
+        <br>
+        <form method="POST" action="/purchseArt">
+            <input type="text" value="First Name"><br>
+            <input type="text" value="Last Name"><br>
+            <input type="text" value="E-Mail">
+            <input type="text" value="Credit Card Number">
+            <input type="date" value="Expiration Date">
+            <input type="number" value="CCV">
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+
+	</body>

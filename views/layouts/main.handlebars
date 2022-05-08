@@ -9,7 +9,14 @@
 			rel="stylesheet"
 			href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
 		/>
-
+<link
+	href="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"
+	rel="stylesheet"
+/>
+<link
+	href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+	rel="stylesheet"
+/>
 		<!--                        scripts                            -->
 		<script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
 
@@ -17,6 +24,32 @@
 	<body>
 		<header>
 			<h6 class="mainHeader accent">Art Point</h6>
+			<form method="POST" action="/home" id="search__form">
+		<div class="search__box">
+			<button class="search__button"><i
+					class="bx bx-search"
+					type="text"
+				></i></button>
+			<input
+				type="text"
+				name="userSearched"
+				id="userSearched"
+				class="search__input"
+				placeholder="Search an Artist..."
+			/>
+		</div>
+	</form>
+	{{#if hasResults}}
+		<ul>
+			{{#each results}}
+				<li>
+					<a href="/shows/{{this.user.id}}">{{this.user.username}}</a>
+				</li>
+			{{/each}}
+		</ul>
+	{{else}}
+		<p class="user__not__found">No Results.</p>
+	{{/if}}
 			<div class="icon__container">
 				<a href="/home"><box-icon
 						name="home"

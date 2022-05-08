@@ -34,6 +34,7 @@ router.get("/:id", async (req, res) => {
 			artDescription: art.artDescription,
 			imageSource: art.imageSource,
 			artist: artist.userName,
+			artistId: art.userId,
 			artRating: art.artRating,
 			artId: art._id,
 			typeGenre: art.typeGenre,

@@ -141,12 +141,10 @@ router.post("/login", async (req, res) => {
     if (req.body.password.length < 6) {
       throw "Password must be at least 6 characters long.";
     }
-    console.log("hi1");
     const checkUser = await userData.checkUser(
       req.body.username,
       req.body.password
     );
-    console.log("hi2");
     if (checkUser.authenticated) {
       req.session.user = req.body.username;
       req.session.userId = checkUser.userId;
@@ -163,15 +161,13 @@ router.post("/login", async (req, res) => {
 
 router.get("/account/:userId", async (req, res) => {
   if (req.session.user) {
-    console.log("req.session.user:", req.session.user)
+    // console.log("req.session.user:", req.session.user)
     try {
-      console.log("id", req.session.userId)
-      let userId = ObjectId(req.session.userId)
+      // console.log("id", req.session.userId)
+      let userId = ObjectId(req.params.userId)
       let user = await userData.getUser(userId);
-      // add get user art
-      let artItems = await artData.getArtByUser(req.session.userId)
-      console.log("artItems:", artItems)
-      res.render("../views/pages/account", { username: user.userName, artItems: artItems});
+      let artItems = await artData.getArtByUser(req.params.userId)
+      res.render("../views/pages/account", { user: user, artItems: artItems});
     } catch (e) {
       console.log(e);
       res.json(e)
@@ -269,7 +265,6 @@ router.post("/home", async (req, res) => {
 
   try {
     const results = await userData.getUserBySearch(userSearchTerm);
-    console.log(results);
   } catch (e) {
     console.log(e);
     res.status(500).json({ error: e });
