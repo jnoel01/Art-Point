@@ -134,10 +134,12 @@ router.post("/login", async (req, res) => {
     if (req.body.password.length < 6) {
       throw "Password must be at least 6 characters long.";
     }
+    console.log("hi1");
     const checkUser = await userData.checkUser(
       req.body.username,
       req.body.password
     );
+    console.log("hi2");
     if (checkUser.authenticated) {
       req.session.user = req.body.username;
       req.session.userId = checkUser.userId;

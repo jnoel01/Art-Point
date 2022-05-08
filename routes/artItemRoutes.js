@@ -50,6 +50,125 @@ router.post("/submitart", upload.single("image"), async (req, res) => {
   //console.log("inside submit art");
   try {
     let artSubmissionInfo = req.body;
+    // checking art title
+    if (!artSubmissionInfo.artTitle) {
+      res.status(400).render("../views/pages/create", {
+        error: "You must provide a title for your art",
+      });
+      return;
+    }
+    if (artSubmissionInfo.artTitle !== "string") {
+      res.status(400).render("../views/pages/create", {
+        error: "Title must be a string",
+      });
+      return;
+    }
+    if (artSubmissionInfo.artTitle.trim().length === 0) {
+      res.status(400).render("../views/pages/create", {
+        error: "Title cannot be an empty string or string with just spaces",
+      });
+      return;
+    }
+
+    artSubmissionInfo.artTitle = artSubmissionInfo.artTitle.trim();
+    // checking art description
+    if (!artSubmissionInfo.artDescription) {
+      res.status(400).render("../views/pages/create", {
+        error: "You must provide a description for your art",
+      });
+      return;
+    }
+    if (typeof artSubmissionInfo.artDescription !== "string") {
+      res.status(400).render("../views/pages/create", {
+        error: "Description must be a string",
+      });
+      return;
+    }
+    if (artSubmissionInfo.artDescription.trim().length === 0) {
+      res.status(400).render("../views/pages/create", {
+        error:
+          "Description cannot be an empty string or string with just spaces",
+      });
+      return;
+    }
+    artSubmissionInfo.artDescription = artSubmissionInfo.artDescription.trim();
+
+    //checking forSale and setPrice
+    if (!artSubmissionInfo.forSale) {
+      if (!artSubmissionInfo.setPrice) {
+        res.status(400).render("../views/pages/create", {
+          error: "Must provide a price",
+        });
+        return;
+      }
+      if (typeof artSubmissionInfo.setPrice !== "number") {
+        res.status(400).render("../views/pages/create", {
+          error: "Price must be a number",
+        });
+        return;
+      }
+      if (artSubmissionInfo.setPrice < 0) {
+        res.status(400).render("../views/pages/create", {
+          error: "Price cannot be negative",
+        });
+        return;
+      }
+      if (artSubmissionInfo.setPrice != artSubmissionInfo.setPrice.toFixed(2)) {
+        res.status(400).render("../views/pages/create", {
+          error: "Price must have 0-2 decimal places",
+        });
+        return;
+      }
+    }
+
+    // checking rating
+    if (artSubmissionInfo.artRating == null) {
+      res.status(400).render("../views/pages/create", {
+        error: "You must provide a rating for your art",
+      });
+      return;
+    }
+    if (typeof artSubmissionInfo.artRating != "number") {
+      res.status(400).render("../views/pages/create", {
+        error: "Rating must be a number",
+      });
+      return;
+    }
+    if (artSubmissionInfo.artRating < 0 || artSubmissionInfo.artRating > 5) {
+      res.status(400).render("../views/pages/create", {
+        error: "artRating has to be between 0 and 5.",
+      });
+      return;
+    }
+    if (artSubmissionInfo.artRating != artSubmissionInfo.artRating.toFixed(1)) {
+      res.status(400).render("../views/pages/create", {
+        error: "artRating must have 0 or 1 decimal places.",
+      });
+      return;
+    }
+
+    // checking genre
+
+    if (!artSubmissionInfo.typeGenre) {
+      res.status(400).render("../views/pages/create", {
+        error: "You must provide a genre for your art",
+      });
+      return;
+    }
+    if (typeof artSubmissionInfo.typeGenre !== "string") {
+      res.status(400).render("../views/pages/create", {
+        error: "Genre must be a string",
+      });
+      return;
+    }
+    if (artSubmissionInfo.typeGenre.trim().length === 0) {
+      res.status(400).render("../views/pages/create", {
+        error: "Genre cannot be an empty string or string with just spaces",
+      });
+      return;
+    }
+    artSubmissionInfo.typeGenre = artSubmissionInfo.typeGenre.trim();
+
     const result = await cloudinary.uploader.upload(req.file.path);
 
     const newArtSubmission = await artItemApi.createArtItem(

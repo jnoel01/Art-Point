@@ -25,6 +25,9 @@
         <input type="number" name="setPrice" id="setPrice" />
         <input type="submit" name="submit" />
       </form>
+      {{#if error}}
+        <p class="error">Error: {{error}}</p>
+      {{/if}}
     </main>
   </body>
 </html>

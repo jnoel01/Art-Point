@@ -2,9 +2,9 @@
 const cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
-	cloud_name: "art-point",
-	api_key: "441664597625179",
-	api_secret: "4KF7kF-or8xea0oCXPq2XYqXWwM",
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
 
 module.exports = cloudinary;
