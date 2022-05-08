@@ -57,7 +57,7 @@ let exportedMethods = {
 
     // -------------- checks if username already exist -----------------
     let usernameCheck = userName.toLowerCase();
-    const dupeCheck = await userCollection.findOne({ userName: usernameCheck });
+    let dupeCheck = await userCollection.findOne({ userName: usernameCheck });
     if (dupeCheck) throw "This username already exists! Try another one.";
     dupeCheck = await userCollection.findOne({ userEmail: email });
     if (dupeCheck) throw "This email is already in use! Try another one.";
