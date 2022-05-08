@@ -171,6 +171,7 @@ router.get("/account/:userId", async (req, res) => {
       // console.log("id", req.session.userId)
       let userId = ObjectId(req.params.userId);
       let user = await userData.getUser(userId);
+<<<<<<< Updated upstream
       let artItems = await artData.getArtByUser(req.params.userId);
 
       //loop through items and separate into two arrays: forSaleItems and notForSaleItems
@@ -189,6 +190,11 @@ router.get("/account/:userId", async (req, res) => {
         forSaleItems: forSaleItems,
         notForSaleItems: notForSaleItems,
       });
+=======
+      // add get user art
+      let artItems = await artData.getArtByUser(req.session.userId)
+      res.render("../views/pages/account", { username: user.userName, artItems: artItems});
+>>>>>>> Stashed changes
     } catch (e) {
       console.log(e);
       res.json(e);
@@ -322,6 +328,7 @@ router.get("/aboutUs", async (req, res) => {
   res.render("../views/pages/aboutUs");
 });
 
+<<<<<<< Updated upstream
 router.get("/purchaseItem/:id", async (req, res) => {
   let artId = req.params.id;
   let artItem = await artData.getArtItemById(artId);
@@ -341,6 +348,10 @@ router.post("/purchased/:id", async (req, res) => {
     artist: artItem.artistName,
     imageSource: artItem.imageSource,
   });
+=======
+router.get("/purchaseItem", async (req, res) => {
+  res.render("../views/pages/purchaseItem");
+>>>>>>> Stashed changes
 });
 
 module.exports = router;

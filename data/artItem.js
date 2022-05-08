@@ -101,12 +101,30 @@ let exportedMethods = {
     if (!insertInfo.acknowledged || !insertInfo.insertedId)
       throw "Could not add art item";
 
+<<<<<<< Updated upstream
     const newId = insertInfo.insertedId.toString();
+=======
+		let newArtItem = {
+			userId: userId,
+			artTitle: artTitle,
+			artDescription: artDescription,
+			forSale: forSale,
+			setPrice: setPrice,
+			artRating: artRating,
+			imageSource: imageSource,
+			imageID: imageID,
+			typeGenre: typeGenre,
+		};
+		const insertInfo = await artItemCollection.insertOne(newArtItem);
+		if (!insertInfo.acknowledged || !insertInfo.insertedId)
+			throw "Could not add art item";
+>>>>>>> Stashed changes
 
     const artItem = await this.getArtItemById(newId);
     return artItem;
   },
 
+<<<<<<< Updated upstream
   async getAllArtItems() {
     const artItemCollection = await artItems();
     const artItemList = await artItemCollection.find({}).toArray();
@@ -116,6 +134,12 @@ let exportedMethods = {
     }
     return artItemList;
   },
+=======
+		const artItem = await this.getArtItemById(newId);
+		console.log("artItem:", artItem);
+		return artItem;
+	},
+>>>>>>> Stashed changes
 
   async getArtItemById(id) {
     if (!id) throw "You must provide an id to search for";

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const configRoutes = require("./routes");
@@ -8,7 +9,6 @@ const connection = require("./config/mongoConnection");
 const { ConnectionCheckedInEvent } = require("mongodb");
 const { parseWithoutProcessing } = require("handlebars");
 
-require("dotenv").config();
 
 app.use("/public", static);
 app.use(express.json());
