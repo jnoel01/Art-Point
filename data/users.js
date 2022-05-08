@@ -8,7 +8,7 @@ let exportedMethods = {
     if (!userId) throw "Must provide a user id";
     try {
       let userCollection = await users();
-      let user = await userCollection.findOne({ _id: userId });
+      let user = await userCollection.findOne({ _id: ObjectId(userId) });
       return user;
     } catch (e) {
       throw e;
@@ -57,8 +57,10 @@ let exportedMethods = {
 
     // -------------- checks if username already exist -----------------
     let usernameCheck = userName.toLowerCase();
-    const dupeCheck = await userCollection.findOne({ username: usernameCheck });
+    const dupeCheck = await userCollection.findOne({ userName: usernameCheck });
     if (dupeCheck) throw "This username already exists! Try another one.";
+    dupeCheck = await userCollection.findOne({ userEmail: email });
+    if (dupeCheck) throw "This email is already in use! Try another one.";
 
     // -------------- get the date they created the account ------------------
     var today = new Date();
@@ -95,15 +97,11 @@ let exportedMethods = {
     if (!username) throw "Username must be supplied!";
     if (!password) throw "Password must be supplied!";
 
-    if (username.trim().length === 0)
-      throw "Username cannot just be empty spaces!";
-    if (password.trim().length === 0)
-      throw "Password cannot just be empty spaces!";
+    if (username.trim().length === 0) throw "Username cannot just be empty spaces!";
+    if (password.trim().length === 0) throw "Password cannot just be empty spaces!";
 
-    if (username.length < 3)
-      throw "Username must be at least 3 characters long.";
-    if (password.length < 8)
-      throw "Password must be at least 8 characters long.";
+    if (username.length < 3) throw "Username must be at least 3 characters long.";
+    if (password.length < 8) throw "Password must be at least 8 characters long.";
 
     for (x of username) {
       if (x === " ") throw "Username cannot have spaces!";
@@ -186,14 +184,14 @@ let exportedMethods = {
     const userCollection = await users();
     let allUsers = await userCollection.find({}).toArray();
 
-    let usersFound = [];
-    for (x of allUsers) {
-      if (userSearched === x.userName) {
-        usersFound.push(x);
-      }
+    const userList = await userCollection.find({ userName: { $regex: userSearched, $options: 'i' } }).toArray();
+
+    if (userList === null) throw new Error('No recipe with that title.');
+    for (u of userList) {
+        u._id = u._id.toString();
     }
 
-    return usersFound;
+    return userList;
   },
 };
 

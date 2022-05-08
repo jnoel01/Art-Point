@@ -19,6 +19,7 @@
 
 					<div class="sub-info">
 						<p>Rating: {{artRating}}</p>
+						<p>Number of Ratings: {{numRatings}}</p>
 						<form id="rating-form">
 							<input
 								type="hidden"
@@ -28,6 +29,8 @@
 							/>
 							<label for="rating">Rate this art</label>
 							<select id="rating-input" name="rating">
+
+								<option value="none" selected disabled hidden>Select</option>
 								<option value="0">0</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -37,9 +40,9 @@
 							</select>
 						</form>
 						<button
-							type="submit"
+							
 							id="rating-form-button"
-							value="submit"
+							
 						>Submit</button>
 					</div>
 				</div>
@@ -48,12 +51,36 @@
 
 						<h4>For Sale:</h4>
 						<p>${{setPrice}} USD</p>
-						<a href="{{purchasePage}}">Click here to purchase!</a>
+						<a href="/purchaseItem/{{artId}}">Click here to purchase!</a>
 					</div>
 				{{/if}}
+				{{#if purchased}}
+					<div class = "purchased-text">
+						<p>This piece has been purchased!</p>
+				{{/if}}
+
 				<h6>Comments:</h6>
+				<form id="comment-form" method="POST" action="/item/comment">
+				<input
+								type="hidden"
+								name="artId"
+								id="artId-input"
+								value="{{artId}}"
+							/>
+				<input
+								type="hidden"
+								name="userId"
+								id="userId-input"
+								value="{{loggedInUser}}"
+							/>
+					<input type="text" name="comment" id="comment-input" placeholder="Leave A Comment" />
+					<input type="submit" value="Send" />
+				</form>
+					{{#each comments}}
+					<p>{{this.message}}</p>
+					{{/each}}
 			</div>
 		</main>
-		<script src="/public/js/updateArtRating.js" type="text/javascript"></script>
+		<script src="/public/js/updateArtRating.js"></script>
 	</body>
 </html>

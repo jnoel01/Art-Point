@@ -22,7 +22,7 @@
           <input type="checkbox" name="forSale" id="forSale" />
         </label>
         <label for="price">Price</label>
-        <input type="number" name="setPrice" id="setPrice" />
+        <input type="number" min="0.00" step =".01" name="setPrice" id="setPrice" />
         <input type="submit" name="submit" />
       </form>
       {{#if error}}

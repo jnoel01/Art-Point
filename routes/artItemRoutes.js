@@ -9,22 +9,9 @@ const { ObjectId } = require("mongodb");
 const cloudinary = require("../utils/cloudinary");
 const upload = require("../utils/multer");
 
-// router.get("/", async (req, res) => {
-//   res.render("../views/pages/artItem", {
-//     //will be replacing fields with database fields
-//     artTitle: "test image",
-//     artImage: "../public/no_image.jpeg",
-//     artist: "some artist",
-//     rating: 5,
-//     genre: "nature",
-//     forSale: true,
-//     salePrice: 5000,
-//     purchasePage: "../views/pages/purchaseItem",
-//   });
-// });
+
 router.get("/:id", async (req, res) => {
 	let artId = req.params.id;
-	//console.log(artId);
 	try {
 		let art = await artItemApi.getArtItemById(artId);
 		let artist = await userData.getUser(ObjectId(art.userId));
@@ -36,20 +23,26 @@ router.get("/:id", async (req, res) => {
 			artist: artist.userName,
 			artistId: art.userId,
 			artRating: art.artRating,
+			numRatings: art.numRatings,
+			purchased: art.purchased,
 			artId: art._id,
 			typeGenre: art.typeGenre,
 			forSale: art.forSale,
 			setPrice: art.setPrice,
-			purchasePage: "../views/pages/purchaseItem",
+			purchasePage: "/purchaseItem",
+			comments: art.artComments,
+			loggedInUser: req.session.userId,
 		});
 	} catch (e) {
 		res.render("../views/pages/error", { error: e });
 	}
 });
 
+
+
 router.post("/submitart", upload.single("image"), async (req, res) => {
-	//console.log("inside submit art");
 	try {
+		
 		let artSubmissionInfo = req.body;
 		// checking art title
 		if (!artSubmissionInfo.artTitle) {
@@ -95,13 +88,20 @@ router.post("/submitart", upload.single("image"), async (req, res) => {
 		artSubmissionInfo.artDescription = artSubmissionInfo.artDescription.trim();
 
 		//checking forSale and setPrice
-		if (!artSubmissionInfo.forSale) {
+		if (artSubmissionInfo.forSale === "on") {
+			artSubmissionInfo.setPrice = parseFloat(artSubmissionInfo.setPrice)
+		artSubmissionInfo.setPrice = artSubmissionInfo.setPrice.toFixed(2);
+		artSubmissionInfo.setPrice = parseFloat(artSubmissionInfo.setPrice);
+			artSubmissionInfo.setPrice = parseFloat(artSubmissionInfo.setPrice)
+			// convert input to float
+			console.log(artSubmissionInfo.setPrice);
 			if (!artSubmissionInfo.setPrice) {
 				res.status(400).render("../views/pages/create", {
 					error: "Must provide a price",
 				});
 				return;
 			}
+			
 			if (typeof artSubmissionInfo.setPrice !== "number") {
 				res.status(400).render("../views/pages/create", {
 					error: "Price must be a number",
@@ -114,42 +114,13 @@ router.post("/submitart", upload.single("image"), async (req, res) => {
 				});
 				return;
 			}
-			if (artSubmissionInfo.setPrice != artSubmissionInfo.setPrice.toFixed(2)) {
-				res.status(400).render("../views/pages/create", {
-					error: "Price must have 0-2 decimal places",
-				});
-				return;
-			}
+			// if ((artSubmissionInfo.setPrice !== artSubmissionInfo.setPrice.toFixed(2)) || (artSubmissionInfo.setPrice !== artSubmissionInfo.setPrice.toFixed())) {
+			// 	res.status(400).render("../views/pages/create", {
+			// 		error: "Price must have 0 or 2 decimal places",
+			// 	});
+			// 	return;
+			// }
 		}
-
-		// checking rating
-		// if (artSubmissionInfo.artRating == null) {
-		//   res.status(400).render("../views/pages/create", {
-		//     error: "You must provide a rating for your art",
-		//   });
-		//   return;
-		// }
-		// if (typeof artSubmissionInfo.artRating != "number") {
-		//   res.status(400).render("../views/pages/create", {
-		//     error: "Rating must be a number",
-		//   });
-		//   return;
-		// }
-		// if (artSubmissionInfo.artRating < 0 || artSubmissionInfo.artRating > 5) {
-		//   res.status(400).render("../views/pages/create", {
-		//     error: "artRating has to be between 0 and 5.",
-		//   });
-		//   return;
-		// }
-		// if (artSubmissionInfo.artRating != artSubmissionInfo.artRating.toFixed(1)) {
-		//   res.status(400).render("../views/pages/create", {
-		//     error: "artRating must have 0 or 1 decimal places.",
-		//   });
-		//   return;
-		// }
-
-		// checking genre
-
 		if (!artSubmissionInfo.typeGenre) {
 			res.status(400).render("../views/pages/create", {
 				error: "You must provide a genre for your art",
@@ -195,12 +166,29 @@ router.post("/rateArt", async (req, res) => {
 	try {
 		let newRating = req.body.rating;
 		let artId = req.body.artId;
-		console.log(artId);
-		console.log(newRating);
-		let update = await artItemApi.updateRating(newRating, artId);
-		console.log(update);
+		if (artRating === "none"){
+			// TODO: error check
+		}
+		const update = await artItemApi.updateRating(artId, newRating);
+		res.redirect(`/item/${artId}`)
 	} catch (e) {
 		res.json(e);
 	}
 });
+router.post('/comment', async (req, res)=>{
+	try{
+		let comment = req.body.comment;
+		let artId = req.body.artId;
+		let userId = req.body.userId;
+		console.log("comment", comment);
+		console.log("id:", artId)
+		console.log("userId", userId)
+		let newComment = await artItemApi.addComment(artId, userId, comment)
+		console.log(newComment)
+		res.redirect(`/item/${artId}`)
+	}
+	catch (e){
+		res.json(e)
+	}
+})
 module.exports = router;

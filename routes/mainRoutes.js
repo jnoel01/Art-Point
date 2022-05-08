@@ -4,13 +4,14 @@ const res = require("express/lib/response");
 const router = express.Router();
 const data = require("../data");
 const {ObjectId} = require("mongodb");
+const { artItem } = require("../data");
 const userData = data.users;
 const artData = data.artItem;
 router.get("/", async (req, res) => {
   if (req.session.user) {
     res.redirect("/account");
   } else {
-    res.status(401).render("../views/pages/homePage", {});
+    res.redirect("/home");
     return;
   }
 });
@@ -81,6 +82,9 @@ router.post("/signup", async (req, res) => {
       throw "Password must be at least 8 characters long.";
     if (req.body.userEmail.length < 8)
       throw "Email must be at least 8 characters long.";
+
+    // ------------- checks if passwords match ------------------------
+    if (req.body.password !== req.body.password2) throw "Passwords do not match!";
 
     // --------------------- call create user from user data ------------
     const user = await userData.createUser(
@@ -167,7 +171,20 @@ router.get("/account/:userId", async (req, res) => {
       let userId = ObjectId(req.params.userId)
       let user = await userData.getUser(userId);
       let artItems = await artData.getArtByUser(req.params.userId)
-      res.render("../views/pages/account", { user: user, artItems: artItems});
+
+      //loop through items and separate into two arrays: forSaleItems and notForSaleItems
+      let forSaleItems = [];
+      let notForSaleItems = [];
+      console.log(artItems);
+      for (let i = 0; i < artItems.length; i++) {
+        if (artItems[i].forSale){
+          forSaleItems.push(artItems[i])
+        }
+        else{
+          notForSaleItems.push(artItems[i])
+        }
+      }
+      res.render("../views/pages/account", { user: user, forSaleItems: forSaleItems, notForSaleItems: notForSaleItems});
     } catch (e) {
       console.log(e);
       res.json(e)
@@ -247,6 +264,7 @@ router.post("/passwordReset", async (req, res) => {
 router.get("/home", async (req, res) => {
   try {
     let artItems = await artData.getAllArtItems();
+    artItems.reverse();
     //console.log(artItems);
     res.render("../views/pages/homePage", { artItems: artItems });
   } catch (e) {
@@ -256,27 +274,31 @@ router.get("/home", async (req, res) => {
 });
 
 router.post("/home", async (req, res) => {
-  let userSearchTerm = req.body.userSearched.trim();
-
-  if (!userSearchTerm) {
-    res.status(400).render("/", { error: "Search term is empty." });
-    return;
-  }
-
+  const searchTerm = req.body.userSearched;
   try {
-    const results = await userData.getUserBySearch(userSearchTerm);
+    if(searchTerm.trim().length === 0){
+      res.render('../views/pages/searchResults', {username: searchTerm, error: "No users with that username."});
+      return;
+    }
+    const results = await userData.getUserBySearch(searchTerm);
+    if (results.length > 0) {
+      res.render('../views/pages/searchResults', {users: results, username: searchTerm });
+    } else {
+      res.render('../views/pages/searchResults', {username: searchTerm, error: "No users with that username."});
+    }
   } catch (e) {
     console.log(e);
     res.status(500).json({ error: e });
+    return;
   }
 });
 
 router.get("/create", async (req, res) => {
-  //if (req.session.user) {
+  if (req.session.user) {
   res.render("../views/pages/create");
-  //} else {
-  // res.status(401).render("../views/pages/login");
-  //}
+  } else {
+   res.status(401).render("../views/pages/login");
+  }
 });
 
 router.get("/support", async (req, res) => {
@@ -285,6 +307,19 @@ router.get("/support", async (req, res) => {
 
 router.get("/aboutUs", async (req, res) => {
   res.render("../views/pages/aboutUs");
+});
+
+router.get("/purchaseItem/:id", async(req, res) => {
+  let artId = req.params.id;
+  let artItem = await artData.getArtItemById(artId);
+	res.render("../views/pages/purchaseItem", {title: artItem.artTitle, artist: artItem.artistName, id: artId});
+});
+
+router.post("/purchased/:id", async(req, res) => {
+  let artId = req.params.id;
+  let artItem = await artData.getArtItemById(artId);
+  await artData.purchaseArt(artId);
+  res.render("../views/pages/purchaseSuccess", {title: artItem.artTitle, artist: artItem.artistName, imageSource: artItem.imageSource})
 });
 
 module.exports = router;

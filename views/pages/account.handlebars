@@ -7,6 +7,7 @@
 	<body>
 		<main class="account page two-column">
 			<div class="left top">
+				<div class="post-container">
 				<div class="account-details standard-card">
 					<img
 						class="profile-pic"
@@ -20,16 +21,12 @@
 						<p>{{user.userEmail}}</p>
 					</div>
 
+
 				</div>
-			</div>
-			<div class="right bottom">
-				<h2>{{user.userName}}'s Art</h2>
-				<button>See For Purchase</button>
-				<button>See All</button>
-				<div class="post-container">
-					{{#each artItems}}
-					
-					<div class="post" href="/item/{{this._id}}">
+
+				<h4>For Sale</h4>
+				{{#each forSaleItems}}
+				<div class="post" href="/item/{{this._id}}">
 						<a href="/item/{{this._id}}">
 							<img src="{{this.imageSource}}" alt="{{this.artTitle}}" />
 						</a>
@@ -40,9 +37,28 @@
 							<p>Description: {{this.artDescription}}</p>
 						</div>
 					</div>
+				{{/each}}
+				</div>
+
+			</div>
+			<div class="right bottom">
+			
+
+				<div class="post-container" class="account-container">
+					<h4 class="not-for-sale">Not For Sale</h4>
+					{{#each notForSaleItems}}
+					<div class="post" href="/item/{{this._id}}">
+						<a href="/item/{{this._id}}">
+							<img src="{{this.imageSource}}" alt="{{this.artTitle}}" />
+						</a>
+
+						<div class="details">
+							<h5>Title: {{this.artTitle}}</h5>
+							<h6>Artist: {{this.artist}}</h6>
+							<p >Description: {{this.artDescription}}</p>
+						</div>
+					</div>
 					{{/each}}
-					
-					
 				</div>
 			</div>
 		</main>

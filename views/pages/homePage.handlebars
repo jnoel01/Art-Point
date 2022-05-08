@@ -2,13 +2,7 @@
 
 <main class="page">
 	<!-- introduction -->
-	<h1>Welcome to Art Point</h1>
-	<caption>
-		<p>
-			Our purpose is to create a social media web application dedicated to users
-			who are art enjoyers or artists.
-		</p>
-	</caption>
+	
 
 	
 	{{!-- <!-- search feature -->
@@ -45,12 +39,27 @@
 
 	<!-- search again -->
 	{{!-- <a href="/">Search Again.</a> --}}
-	<h2>Art</h2>
+	<div class="post-container">
+		<h1>Welcome to Art Point</h1>
+	<caption>
+		<p>
+			Our purpose is to create a social media web application dedicated to users
+			who are art enjoyers or artists.
+		</p>
+	</caption>
 	{{#each artItems}}
-		<li>
-			<a href="/item/{{this._id}}">
-				<img src="{{this.imageSource}}" alt="{{this.artTitle}}" />
-			</a>
-		</li>
+		
+		<div class="post" href="/item/{{this._id}}">
+						<a href="/item/{{this._id}}">
+							<img src="{{this.imageSource}}" alt="{{this.artTitle}}" />
+						</a>
+
+						<div class="details">
+							<h5>Title: {{this.artTitle}}</h5>
+							<h6>Artist: {{this.artistName}}</h6>
+							<p>Description: {{this.artDescription}}</p>
+						</div>
+					</div>
 	{{/each}}
+	</div>
 </main>

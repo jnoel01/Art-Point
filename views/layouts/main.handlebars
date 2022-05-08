@@ -9,54 +9,49 @@
 			rel="stylesheet"
 			href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
 		/>
-<link
-	href="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"
-	rel="stylesheet"
-/>
-<link
-	href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
-	rel="stylesheet"
-/>
+		<link
+			href="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+			rel="stylesheet"
+		/>
 		<!--                        scripts                            -->
 		<script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
 
 	</head>
 	<body>
 		<header>
-			<h6 class="mainHeader accent">Art Point</h6>
-			<form method="POST" action="/home" id="search__form">
-		<div class="search__box">
-			<button class="search__button"><i
-					class="bx bx-search"
-					type="text"
-				></i></button>
-			<input
-				type="text"
-				name="userSearched"
-				id="userSearched"
-				class="search__input"
-				placeholder="Search an Artist..."
-			/>
-		</div>
-	</form>
-	{{#if hasResults}}
-		<ul>
-			{{#each results}}
-				<li>
-					<a href="/shows/{{this.user.id}}">{{this.user.username}}</a>
-				</li>
-			{{/each}}
-		</ul>
-	{{else}}
-		<p class="user__not__found">No Results.</p>
-	{{/if}}
+			<a href="/home" class = "mainHeader accent"><h6 class="mainHeader accent">Art Point</h6></a>
+	
 			<div class="icon__container">
+				<a href="#" class="search__link">
+					<form method="POST" action="/home" id="search__form">
+						<div class="">
+							<input
+								type="text"
+								name="userSearched"
+								id="userSearched"
+								class="search__input"
+								placeholder="Search an Artist..."
+							/>
+						</div>
+					</form>
+				</a>
+				<a href="#search__form" onClick="myFunction()"/>
+				<script>
+				function myFunction() {
+					document.getElementById('search__form').submit();
+				}
+				</script>
+					<box-icon
+						name="search-alt"
+						animation="tada-hover"
+					></box-icon>
+				</a>
 				<a href="/home"><box-icon
 						name="home"
-						animation="tada-hover"
-					></box-icon></a>
-				<a href="#"><box-icon
-						name="store-alt"
 						animation="tada-hover"
 					></box-icon></a>
 				<a href="/create"><box-icon
@@ -79,35 +74,14 @@
 
 		<footer>
 			<div class="social__container">
-				<a href="/" class="page__item"><box-icon
-						type="logo"
-						name="instagram-alt"
-					></box-icon></a>
-				<a href="/" class="page__item"><box-icon
-						type="logo"
-						name="snapchat"
-					></box-icon></a>
-				<a href="/" class="page__item"><box-icon
-						type="logo"
-						name="facebook-square"
-					></box-icon></a>
-				<a href="/" class="page__item"><box-icon
-						type="logo"
-						name="linkedin-square"
-					></box-icon></a>
+				<a>© ArtPoint Inc. 2022</a>
 			</div>
 
-			<div class="logo__container">
-				<p class="accent">Art Point</p>
-			</div>
 
 			<div class="nav__container">
-				<a href="/home" class="page__item">home</a>
-				<a href="#" class="page__item">artists</a>
-				<a href="#" class="page__item">store</a>
 				<a href="/aboutUs" class="page__item">About</a>
 				<a href="/support" class="page__item">Support</a>
-				<a href="/logout" class="page__item">logout</a>
+				<a href="/logout" class="page__item">Logout</a>
 			</div>
 		</footer>
 		<script
