@@ -57,7 +57,7 @@ router.post("/submitart", upload.single("image"), async (req, res) => {
       });
       return;
     }
-    if (artSubmissionInfo.artTitle !== "string") {
+    if (typeof artSubmissionInfo.artTitle !== "string") {
       res.status(400).render("../views/pages/create", {
         error: "Title must be a string",
       });
@@ -122,30 +122,30 @@ router.post("/submitart", upload.single("image"), async (req, res) => {
     }
 
     // checking rating
-    if (artSubmissionInfo.artRating == null) {
-      res.status(400).render("../views/pages/create", {
-        error: "You must provide a rating for your art",
-      });
-      return;
-    }
-    if (typeof artSubmissionInfo.artRating != "number") {
-      res.status(400).render("../views/pages/create", {
-        error: "Rating must be a number",
-      });
-      return;
-    }
-    if (artSubmissionInfo.artRating < 0 || artSubmissionInfo.artRating > 5) {
-      res.status(400).render("../views/pages/create", {
-        error: "artRating has to be between 0 and 5.",
-      });
-      return;
-    }
-    if (artSubmissionInfo.artRating != artSubmissionInfo.artRating.toFixed(1)) {
-      res.status(400).render("../views/pages/create", {
-        error: "artRating must have 0 or 1 decimal places.",
-      });
-      return;
-    }
+    // if (artSubmissionInfo.artRating == null) {
+    //   res.status(400).render("../views/pages/create", {
+    //     error: "You must provide a rating for your art",
+    //   });
+    //   return;
+    // }
+    // if (typeof artSubmissionInfo.artRating != "number") {
+    //   res.status(400).render("../views/pages/create", {
+    //     error: "Rating must be a number",
+    //   });
+    //   return;
+    // }
+    // if (artSubmissionInfo.artRating < 0 || artSubmissionInfo.artRating > 5) {
+    //   res.status(400).render("../views/pages/create", {
+    //     error: "artRating has to be between 0 and 5.",
+    //   });
+    //   return;
+    // }
+    // if (artSubmissionInfo.artRating != artSubmissionInfo.artRating.toFixed(1)) {
+    //   res.status(400).render("../views/pages/create", {
+    //     error: "artRating must have 0 or 1 decimal places.",
+    //   });
+    //   return;
+    // }
 
     // checking genre
 

@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const configRoutes = require("./routes");
-const dotenv = require("dotenv");
 const static = express.static(__dirname + "/public");
 var exphbs = require("express-handlebars");
 const session = require("express-session");
@@ -9,7 +8,7 @@ const connection = require("./config/mongoConnection");
 const { ConnectionCheckedInEvent } = require("mongodb");
 const { parseWithoutProcessing } = require("handlebars");
 
-dotenv.config();
+require("dotenv").config();
 
 app.use("/public", static);
 app.use(express.json());
