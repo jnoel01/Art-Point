@@ -9,7 +9,7 @@ Note: most of the work was completed as a team on liveshare. This may skew the n
 <h3>&nbsp;</h3>
 <h3><span style="text-decoration: underline;"><span style="color: #008080; text-decoration: underline;">How to Use: </h3>
 <ol>
- <li>download and unzip (if needed) the code. </li>
+ <li>download and unzip (if needed) the code. (Make sure you have the env) </li>
  <li>ensure all necessary development CLI’s are installed</li>
  <li>in the root directory of the project run “npm install”</li>
  <li>run “node ./tasks/seed.js”</li>
