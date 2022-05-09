@@ -10,7 +10,17 @@
 <h3>&nbsp;</h3>
 <h3><span style="text-decoration: underline;"><span style="color: #008080; text-decoration: underline;">Screenshots/Demo:</span></span></h3>
 <h3>&nbsp;</h3>
-<h3><span style="text-decoration: underline;"><span style="color: #008080; text-decoration: underline;">How to Use:</span></span></h3>
+<h3><span style="text-decoration: underline;"><span style="color: #008080; text-decoration: underline;">How to Use: 
+ <br>
+ How to use Artpoint 
+
+1. download and unzip (if needed) the code. 
+2. ensure all necessary development CLI’s are installed
+3. in the root directory of the project run “npm install”
+4. run “node ./tasks/seed.js”
+5. then run “npm start”
+
+Note: most of the work was completed as a team on liveshare. This may skew the number of commits</span></span></h3>
 <h3>&nbsp;</h3>
 <h3><span style="text-decoration: underline;"><span style="color: #008080; text-decoration: underline;">Prerequisites:</span></span></h3>
 <p>&nbsp;</p>
