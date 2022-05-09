@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>Login</title>
@@ -7,13 +8,14 @@
 			<h1>Login</h1>
 			<form action="/login" method="POST" id="login-form">
 				<div class="form__div">
-					<label for="username">Username</label>
+					<label for="userName">Username</label>
 					<input
 						type="text"
 						name="username"
 						id="userName"
 						placeholder="Username"
 						autocomplete="username"
+						pattern="[A-Za-z0-9]{3,}"
 						required
 					/>
 				</div>
@@ -26,6 +28,7 @@
 						id="password"
 						placeholder="Password"
 						autocomplete="current-password"
+						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[#?!@$%^&*-\]\[]).{8,}"
 						required
 					/>
 				</div>

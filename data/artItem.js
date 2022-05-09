@@ -4,7 +4,7 @@ const userApi = require("./users");
 const { ObjectId } = require("mongodb");
 const { type, set } = require("express/lib/response");
 const { artItems } = require("../config/mongoCollections");
-const { artItem } = require(".");
+//const { artItem } = require(".");
 
 let exportedMethods = {
   async createArtItem(
@@ -16,7 +16,7 @@ let exportedMethods = {
     artRating,
     typeGenre,
     imageSource,
-    imageID
+    imageID,
   ) {
     // checking user id
     if (!userId) throw "You must provide a user ID to search for";
@@ -96,6 +96,7 @@ let exportedMethods = {
       imageID: imageID,
       artComments: [],
       typeGenre: typeGenre,
+      timeUploaded: timeUploaded
     };
     const insertInfo = await artItemCollection.insertOne(newArtItem);
     if (!insertInfo.acknowledged || !insertInfo.insertedId)
@@ -142,11 +143,22 @@ let exportedMethods = {
     const userArtItems = await artCollection.find({ userId: id }).toArray();
     return userArtItems;
   },
-  async purchaseArt(id) {
+  async purchaseArt(artId, userId) {
+    console.log(userId);
     const artCollection = await artItems();
+    const userCollection = await users();
+    let user = await userCollection.findOne({ _id: ObjectId(userId) });
+    let artItem = await this.getArtItemById(artId);
+    let newPurchases = user.userPurchases;
     artCollection.updateOne(
-      { _id: ObjectId(id) },
-      { $set: { purchased: true, forSale: false } }
+      { _id: ObjectId(artId) },
+      { $set: { purchased: true, forSale: false } });
+    let artItemUpdate = await this.getArtItemById(artId);
+    newPurchases.push(artItemUpdate);
+    console.log(newPurchases);
+    userCollection.updateOne(
+      {_id: ObjectId(userId)},
+      { $set: {userPurchases: newPurchases}}
     );
   },
   async updateRating(id, rating) {

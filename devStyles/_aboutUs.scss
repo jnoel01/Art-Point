@@ -14,6 +14,7 @@ display: flex;
 justify-content: center;
 width: auto;
 text-align: center;
+flex-wrap: wrap;
 }
 
 .team .person{
@@ -57,7 +58,6 @@ border-radius: 40%;
 }
 
 .purpose {
-    margin-left: 0.5in;
     padding: 10px 16px;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -69,17 +69,8 @@ border-radius: 40%;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
-.titlePurp {
-    margin-left: 0.5in;
-}
-  
+
 #aboutPic{
-    height: 2in;
-    width: 4.5in;
+    height: 10rem;
     border-radius: 40px;
-    display: flex;
-    display: block;
-    margin-left: auto;
-    margin-right: 25px;
-    margin-top: -200px;
 }

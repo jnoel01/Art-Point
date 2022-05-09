@@ -1,57 +1,22 @@
-
-
-<main class="page">
-	<!-- introduction -->
-	
-
-	
-	{{!-- <!-- search feature -->
-	<form method="POST" action="/home" id="search__form">
-		<div class="search__box">
-			<button class="search__button"><i
-					class="bx bx-search"
-					type="text"
-				></i></button>
-			<input
-				type="text"
-				name="userSearched"
-				id="userSearched"
-				class="search__input"
-				placeholder="Search an Artist..."
-			/>
-		</div>
-	</form> --}}
-
-	
-
-	<!-- search results -->
-	{{!-- {{#if hasResults}}
-		<ul>
-			{{#each results}}
-				<li>
-					<a href="/shows/{{this.user.id}}">{{this.user.username}}</a>
-				</li>
-			{{/each}}
-		</ul>
-	{{else}}
-		<p class="user__not__found">No Results.</p>
-	{{/if}} --}}
-
-	<!-- search again -->
-	{{!-- <a href="/">Search Again.</a> --}}
-	<div class="post-container">
-		<h1>Welcome to Art Point</h1>
-	<caption>
-		<p>
-			Our purpose is to create a social media web application dedicated to users
-			who are art enjoyers or artists.
-		</p>
-	</caption>
-	{{#each artItems}}
-		
-		<div class="post" href="/item/{{this._id}}">
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>{{artTitle}}</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="post-container">
+				<h1>Welcome to Art Point</h1>
+				<p>
+					Our purpose is to create a social media web application dedicated to users
+					who are art enjoyers or artists.
+				</p>
+				
+				{{#each artItems}}
+					<div class="post">
 						<a href="/item/{{this._id}}">
-							<img src="{{this.imageSource}}" alt="{{this.artTitle}}" />
+							<img src="{{this.imageSource}}" alt="{{this.artTitle}}"/>
 						</a>
 
 						<div class="details">
@@ -60,6 +25,10 @@
 							<p>Description: {{this.artDescription}}</p>
 						</div>
 					</div>
-	{{/each}}
-	</div>
-</main>
+				{{/each}}
+			</div>
+		</main>
+	</body>
+</html>
+
+

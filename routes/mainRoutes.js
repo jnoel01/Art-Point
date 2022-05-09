@@ -7,6 +7,7 @@ const { ObjectId } = require("mongodb");
 const { artItem } = require("../data");
 const userData = data.users;
 const artData = data.artItem;
+const xss = require('xss');
 router.get("/", async (req, res) => {
   if (req.session.user) {
     res.redirect("/account");
@@ -53,6 +54,12 @@ router.post("/signup", async (req, res) => {
     // -------------- checks if all strings are not empty ---------
     if (req.body.userName.trim().length === 0)
       throw "Username cannot just be empty spaces!";
+    let tempUsername = req.body.username;
+    for (let x in tempUsername) {
+      if (x === " ") {
+        throw "Username cannot have spaces!";
+      }
+    }
     if (req.body.firstName.trim().length === 0)
       throw "First Name cannot just be empty spaces!";
     if (req.body.lastName.trim().length === 0)
@@ -86,15 +93,15 @@ router.post("/signup", async (req, res) => {
     // ------------- checks if passwords match ------------------------
     if (req.body.password !== req.body.password2)
       throw "Passwords do not match!";
-
+   
     // --------------------- call create user from user data ------------
     const user = await userData.createUser(
-      req.body.userName,
-      req.body.password,
-      req.body.firstName,
-      req.body.lastName,
-      req.body.userEmail,
-      req.body.userDob
+      xss(req.body.userName),
+      xss(req.body.password),
+      xss(req.body.firstName),
+      xss(req.body.lastName),
+      xss(req.body.userEmail),
+      xss(req.body.userDob)
     );
 
     if (user.userInserted) {
@@ -147,8 +154,8 @@ router.post("/login", async (req, res) => {
       throw "Password must be at least 6 characters long.";
     }
     const checkUser = await userData.checkUser(
-      req.body.username,
-      req.body.password
+      xss(req.body.username),
+      xss(req.body.password)
     );
     if (checkUser.authenticated) {
       req.session.user = req.body.username;
@@ -176,6 +183,8 @@ router.get("/account/:userId", async (req, res) => {
       //loop through items and separate into two arrays: forSaleItems and notForSaleItems
       let forSaleItems = [];
       let notForSaleItems = [];
+      let hasPurchases = false;
+      let userPurchases = [];
       //console.log(artItems);
       for (let i = 0; i < artItems.length; i++) {
         if (artItems[i].forSale) {
@@ -184,10 +193,17 @@ router.get("/account/:userId", async (req, res) => {
           notForSaleItems.push(artItems[i]);
         }
       }
+      userPurchases = user.userPurchases;//TODO<-- check that user attribuite
+      if (userPurchases.length > 0){
+        hasPurchases = true;
+      }
+
       res.render("../views/pages/account", {
         user: user,
         forSaleItems: forSaleItems,
         notForSaleItems: notForSaleItems,
+        hasPurchases: hasPurchases,
+        userPurchases: userPurchases, 
       });
     } catch (e) {
       console.log(e);
@@ -203,7 +219,7 @@ router.get("/account/:userId", async (req, res) => {
 
 router.get("/logout", async (req, res) => {
   res.clearCookie("AuthCookie");
-  res.render("../views/pages/homePage");
+  res.redirect("/home");
 });
 
 router.get("/passwordReset", async (req, res) => {
@@ -225,7 +241,8 @@ router.post("/passwordReset", async (req, res) => {
     if (req.body.username.trim().length === 0) {
       throw "Username cannot just be empty spaces!";
     }
-    for (x of req.body.username) {
+    let tempUsername = req.body.username;
+    for (let x in tempUsername) {
       if (x === " ") {
         throw "Username cannot have spaces!";
       }
@@ -250,8 +267,8 @@ router.post("/passwordReset", async (req, res) => {
     }
 
     const updateUser = await userData.resetPassword(
-      req.body.username,
-      req.body.password
+      xss(req.body.username),
+      xss(req.body.password)
     );
 
     if (updateUser.passwordUpdated) {
@@ -278,7 +295,7 @@ router.get("/home", async (req, res) => {
 });
 
 router.post("/home", async (req, res) => {
-  const searchTerm = req.body.userSearched;
+  const searchTerm = xss(req.body.userSearched);
   try {
     if (searchTerm.trim().length === 0) {
       res.render("../views/pages/searchResults", {
@@ -314,10 +331,6 @@ router.get("/create", async (req, res) => {
   }
 });
 
-router.get("/support", async (req, res) => {
-  res.render("../views/pages/support");
-});
-
 router.get("/aboutUs", async (req, res) => {
   res.render("../views/pages/aboutUs");
 });
@@ -335,7 +348,7 @@ router.get("/purchaseItem/:id", async (req, res) => {
 router.post("/purchased/:id", async (req, res) => {
   let artId = req.params.id;
   let artItem = await artData.getArtItemById(artId);
-  await artData.purchaseArt(artId);
+  await artData.purchaseArt(artId, req.session.userId);
   res.render("../views/pages/purchaseSuccess", {
     title: artItem.artTitle,
     artist: artItem.artistName,

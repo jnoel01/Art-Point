@@ -1,19 +1,19 @@
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<title>{{artTitle}}</title>
 	</head>
 	<body>
-		<main class="art-item">
+		<main class="art-item page">
 			<div class="img-container">
-				<img src="{{imageSource}}" id="art-image" />
+				<img src="{{imageSource}}" id="art-image" alt="{{artTitle}}"/>
 			</div>
 			<div class="info">
 				<div class="std-card">
 					<h2>{{artTitle}}</h2>
-					<a href="/account/{{artistId}}">
-					<p>By @{{artist}}</p>
-					</a>
+					<p>{{timeUploaded}}</p>
+					<p>By <a href="/account/{{artistId}}">@{{artistName}}</a></p>
 					<p class="genre">{{typeGenre}}</p>
 					<p>{{artDescription}}</p>
 
@@ -27,9 +27,8 @@
 								id="artId-input"
 								value="{{artId}}"
 							/>
-							<label for="rating">Rate this art</label>
+							<label for="rating-input">Rate this art</label>
 							<select id="rating-input" name="rating">
-
 								<option value="none" selected disabled hidden>Select</option>
 								<option value="0">0</option>
 								<option value="1">1</option>
@@ -39,16 +38,11 @@
 								<option value="5">5</option>
 							</select>
 						</form>
-						<button
-							
-							id="rating-form-button"
-							
-						>Submit</button>
+						<button id="rating-form-button">Submit</button>
 					</div>
 				</div>
 				{{#if forSale}}
 					<div class="for-sale">
-
 						<h4>For Sale:</h4>
 						<p>${{setPrice}} USD</p>
 						<a href="/purchaseItem/{{artId}}">Click here to purchase!</a>
@@ -57,30 +51,47 @@
 				{{#if purchased}}
 					<div class = "purchased-text">
 						<p>This piece has been purchased!</p>
+					</div>
 				{{/if}}
 
 				<h6>Comments:</h6>
-				<form id="comment-form" method="POST" action="/item/comment">
-				<input
-								type="hidden"
-								name="artId"
-								id="artId-input"
-								value="{{artId}}"
-							/>
-				<input
-								type="hidden"
-								name="userId"
-								id="userId-input"
-								value="{{loggedInUser}}"
-							/>
-					<input type="text" name="comment" id="comment-input" placeholder="Leave A Comment" />
-					<input type="submit" value="Send" />
-				</form>
-					{{#each comments}}
-					<p>@{{this.userName}}: {{this.message}}</p>
-					{{/each}}
+
+				{{#if loggedInUser}}
+					<form id="comment-form" method="POST" action="/item/comment">
+						<input
+							type="hidden"
+							name="artId"
+							id="artId-input-comment"
+							value="{{artId}}"
+						/>
+						<input
+							type="hidden"
+							name="userId"
+							id="userId-input"
+							value="{{loggedInUser}}"
+						/>
+						<input 
+							type="text" 
+							name="comment" 
+							id="comment-input" 
+							placeholder="Leave A Comment" 
+						/>
+						<input 
+							type="submit" 
+							value="Send" 
+						/>
+					</form>
+				{{/if}}
+				{{#each comments}}
+					<p><a href="/account/{{this.userId}}">@{{this.userName}}</a>: {{this.message}}</p>
+				{{/each}}
 			</div>
 		</main>
+		
+		<!-- SCRIPTS -->
 		<script src="/public/js/updateArtRating.js"></script>
 	</body>
+
+	
+
 </html>

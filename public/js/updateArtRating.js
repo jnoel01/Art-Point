@@ -1,10 +1,10 @@
 $(function ($) {
-  console.log("i'm here");
   $("#rating-form-button").on("click", function (event) {
+
     event.preventDefault();
+    console.log("right here in ajax")
     let rating = $("#rating-input").val();
     let artId = $("#artId-input").val();
-    console.log("here in ajax");
     $.post(
       "http://localhost:3000/item/rateArt",
       {
@@ -16,26 +16,4 @@ $(function ($) {
       }
     );
   });
-  // $("#comment-button").on("click", function (event) {
-  //   event.preventDefault();
-  //   let comment = $("#comment-input").val();
-  //   let artId = $("#artId-input").val();
-  //   let userId = ("#userId-input").val();
-  //   if (!userId) {
-  //     console.log("not logged in")
-  //   }
-  //   console.log(userId)
-  //   console.log("here in ajax");
-  //   $.post(
-  //     "http://localhost:3000/item/comment",
-  //     {
-  //       comment: comment,
-  //       artId: artId,
-  //       userId: userId,
-  //     },
-  //     function (data, status) {
-  //         window.location.reload();
-  //     }
-  //   );
-  // });
 })(window.jQuery);

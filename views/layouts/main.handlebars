@@ -1,7 +1,8 @@
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-
+		<title>Art Point</title>
 		<!--                        links                            -->
 		<link title="Main CSS" rel="stylesheet" href="/public/css/styles.css" />
 		<link
@@ -26,30 +27,31 @@
 			<a href="/home" class = "mainHeader accent"><h6 class="mainHeader accent">Art Point</h6></a>
 	
 			<div class="icon__container">
-				<a href="#" class="search__link">
-					<form method="POST" action="/home" id="search__form">
-						<div class="">
-							<input
-								type="text"
-								name="userSearched"
-								id="userSearched"
-								class="search__input"
-								placeholder="Search an Artist..."
-							/>
-						</div>
-					</form>
+				
+				<form method="POST" action="/home" id="search__form">
+					<div class="">
+						<input
+							type="text"
+							name="userSearched"
+							id="userSearched"
+							class="search__input"
+							placeholder="Search an Artist..."
+						/>
+					</div>
+				</form>
+				
+				<a href="#search__form" onClick="myFunction()">
+						<box-icon
+							name="search-alt"
+							animation="tada-hover"
+						></box-icon>
 				</a>
-				<a href="#search__form" onClick="myFunction()"/>
 				<script>
-				function myFunction() {
-					document.getElementById('search__form').submit();
-				}
-				</script>
-					<box-icon
-						name="search-alt"
-						animation="tada-hover"
-					></box-icon>
-				</a>
+					function myFunction() {
+						document.getElementById('search__form').submit();
+					}
+				</script>	
+				
 				<a href="/home"><box-icon
 						name="home"
 						animation="tada-hover"
@@ -74,13 +76,13 @@
 
 		<footer>
 			<div class="social__container">
-				<a>© ArtPoint Inc. 2022</a>
+				<a>ArtPoint Inc. © 2022</a>
 			</div>
 
 
 			<div class="nav__container">
 				<a href="/aboutUs" class="page__item">About</a>
-				<a href="/support" class="page__item">Support</a>
+				<a href="mailto:support@artpoint.com?&subject=Art%20Point%20Support&body=Type-your-message-here" class="page__item">Contact Us</a>
 				<a href="/logout" class="page__item">Logout</a>
 			</div>
 		</footer>

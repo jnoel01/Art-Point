@@ -1,5 +1,5 @@
+<!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta charset="utf-8" />
 		<title>{{user.userName}}</title>
@@ -26,35 +26,53 @@
 
 				<h4>For Sale</h4>
 				{{#each forSaleItems}}
-				<div class="post" href="/item/{{this._id}}">
+				<div class="post">
+					<a href="/item/{{this._id}}">
+						<img src="{{this.imageSource}}" alt="{{this.artTitle}}" />
+					</a>
+
+					<div class="details">
+						<h5>Title: {{this.artTitle}}</h5>
+						{{!-- <h6>Artist: {{this.artist}}</h6> --}}
+						<p>Description: {{this.artDescription}}</p>
+					</div>
+				</div>
+				{{/each}}
+				{{#if hasPurchases}}
+				<div class="post-container account-container">
+					<h4 class="not-for-sale">Purchased Art</h4>
+					{{#each userPurchases}}
+					<div class="post">
 						<a href="/item/{{this._id}}">
 							<img src="{{this.imageSource}}" alt="{{this.artTitle}}" />
 						</a>
 
 						<div class="details">
 							<h5>Title: {{this.artTitle}}</h5>
-							<h6>Artist: {{this.artist}}</h6>
-							<p>Description: {{this.artDescription}}</p>
+							{{!-- <h6>Artist: {{this.artist}}</h6> --}}
+							<p >Description: {{this.artDescription}}</p>
 						</div>
 					</div>
-				{{/each}}
+					{{/each}}
+				</div>
+
+				{{/if}}
 				</div>
 
 			</div>
 			<div class="right bottom">
-			
-
-				<div class="post-container" class="account-container">
+				<div class="post-container account-container">
+					
 					<h4 class="not-for-sale">Not For Sale</h4>
 					{{#each notForSaleItems}}
-					<div class="post" href="/item/{{this._id}}">
+					<div class="post">
 						<a href="/item/{{this._id}}">
 							<img src="{{this.imageSource}}" alt="{{this.artTitle}}" />
 						</a>
 
 						<div class="details">
 							<h5>Title: {{this.artTitle}}</h5>
-							<h6>Artist: {{this.artist}}</h6>
+							{{!-- <h6>Artist: {{this.artist}}</h6> --}}
 							<p >Description: {{this.artDescription}}</p>
 						</div>
 					</div>

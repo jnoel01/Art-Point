@@ -1,37 +1,111 @@
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>PurchasePage</title>
 	</head>
 	<body>
     <main class="page">
-      
         <h1>You are purchasing {{title}} made by {{artist}} </h1>
         <div> Please fill out the information to purchase. </div>
+
         <br>
+
         <form method="POST" action="/purchased/{{id}}">
-        <div class = "payment">
-            <label for = "purchasefirst"> First Name </label>
-            <input type="text" placeholder="First Name" minlength = 3 required><br>
-            <label for = "purchaselast"> Last Name </label>
-            <input type="text" placeholder="Last Name" minlength = 2 required><br>
-            <label for = "purchaseemail"> Email </label>
-            <input type="email" placeholder="E-mail" required>
-            <label for = "purchasecc">Card Number</label>
-            <input type="tel" placeholder="xxxx-xxxx-xxxx-xxxx" autocomplete = "cc-number" maxlength = 16 minlength = 15 required>
-            <label for = "purchaseexp">Expiration Date</label>
-            <input type="month" placeholder="Expiration Date" min="2022-06" required>
-            <label for = "purchasecc">CCV</label>
-            <input type="tel" placeholder="CCV" maxlength = 4 minlength = 3 required>
-            <label for = "purchaseaddress">Address</label>
-            <input type="text" placeholder="Shipping Address" required>
-            <label for = "purchasezip">Zipcode</label>
-            <input type="tel" placeholder="Zipcode" maxlength = 5 max required>
-            <label for = "purchasecity">City</label>
-            <input type="text" placeholder="City" required>
-            <label for = "purchasestate">State</label>
-            <input type="text" placeholder="State" required>
-            <input type="submit" value="Submit">
-        </div>
+            <div class="payment">
+                <label for="purchasefirst">First Name</label>
+                <input 
+                    id="purchasefirst"
+                    type="text" 
+                    placeholder="First Name" 
+                    minlength=3 
+                    required
+                >
+
+                <br>
+
+                <label for="purchaselast">Last Name</label>
+                <input 
+                    id="purchaselast"
+                    type="text" 
+                    placeholder="Last Name" 
+                    minlength=2 
+                    required
+                >
+
+                <br>
+
+                <label for="purchaseemail"> Email </label>
+                <input 
+                    id="purchaseemail"
+                    type="email" 
+                    placeholder="E-mail" 
+                    required
+                >
+
+                <label for="purchasecc">Card Number</label>
+                <input
+                    id="purchasecc" 
+                    type="tel"
+                    placeholder="xxxx-xxxx-xxxx-xxxx" 
+                    autocomplete="cc-number" 
+                    maxlength=16 
+                    minlength=15 
+                    required
+                >
+
+                <label for="purchaseexp">Expiration Date</label>
+                <input 
+                    id="purchaseexp"
+                    type="month" 
+                    min="2022-06" 
+                    required
+                >
+
+                <label for="purchaseccv">CCV</label>
+                <input 
+                    id="purchaseccv"
+                    type="tel" 
+                    placeholder="CCV" 
+                    maxlength=4 
+                    minlength=3 
+                    required
+                >
+
+                <label for="purchaseaddress">Address</label>
+                <input 
+                    id="purchaseaddress"
+                    type="text" 
+                    placeholder="Shipping Address" 
+                    required
+                >
+
+                <label for ="purchasezip">Zipcode</label>
+                <input 
+                    id="purchasezip"
+                    type="tel" 
+                    placeholder="Zipcode" 
+                    maxlength=5 
+                    required
+                >
+
+                <label for="purchasecity">City</label>
+                <input 
+                    id="purchasecity"
+                    type="text" 
+                    placeholder="City" 
+                    required
+                >
+
+                <label for="purchasestate">State</label>
+                <input 
+                    id="purchasestate"
+                    type="text" 
+                    placeholder="State" 
+                    required
+                >
+                
+                <input type="submit" value="Submit">
+            </div>
         </form>
     </main>
        

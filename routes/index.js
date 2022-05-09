@@ -4,7 +4,7 @@ const constructorMethod = (app) => {
   app.use("/", mainRoutes);
   app.use("/item", artItemRoutes);
   app.use("*", (req, res) => {
-    res.sendStatus(404);
+    res.render("../views/pages/error");
   });
 };
 

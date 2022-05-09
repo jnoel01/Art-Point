@@ -1,24 +1,33 @@
-<main class="page">
-    <div class = "username-container">
-        {{#if error}}
-        <div class "search-error">
-            <p>{{error}}</p>
-        </div>
-        {{else}}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Results</title>
+	</head>
+	<body>
+        <main class="page">
+            <div class = "username-container">
+                {{#if error}}
+                    <div class="search-error">
+                        <p>{{error}}</p>
+                    </div>
+                {{else}}
 
-        {{#each users}}
-            <div class="account__post">
-                <div class="post">
-                    <a href="/account/{{_id}}">
-                        <div class="image__container">
-                        <img src="https://secure.img1-fg.wfcdn.com/im/92838486/compr-r85/3709/37095587/baby-elephant-statue.jpg" width="400" height="400" alt="User">
+                    {{#each users}}
+                        <div class="account__post">
+                            <div class="">
+                                <a class="account__link" href="/account/{{_id}}">
+                                    <div class="account__name">{{firstName}} {{lastName}}</div>
+                                    <div class="account__username">@{{userName}}</div>
+                                </a>
+                            </div>
                         </div>
-                        <div class="name">{{firstName}} {{lastName}}</div>
-                        <div class="card__username">@{{userName}}</div>
-                    </a>
-                </div>
+                    {{/each}}
+                {{/if}}
             </div>
-        {{/each}}
-        {{/if}}
-    </div>
-</main>
+        </main>
+	</body>
+</html>
+
+
+

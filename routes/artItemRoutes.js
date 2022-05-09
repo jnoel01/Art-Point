@@ -8,19 +8,54 @@ const artItemApi = require("../data/artItem");
 const { ObjectId } = require("mongodb");
 const cloudinary = require("../utils/cloudinary");
 const upload = require("../utils/multer");
-
+const xss = require('xss');
 router.get("/:id", async (req, res) => {
   let artId = req.params.id;
   try {
     let art = await artItemApi.getArtItemById(artId);
     let artist = await userData.getUser(ObjectId(art.userId));
+    if (!art.artTitle) {
+      throw "Art Title not found for item"
+    }
+    
+    if (!art.artDescription) {
+      throw "Art Description not found for item"
+    }
+    if (!art.imageSource) {
+      throw "Image source not found for item"
+    }
+    if (!artist.userName) {
+      throw "Artist not found for item"
+    }
+    if (!art.userId) {
+      throw "Artist ID not found for item"
+    }
+    // if (!art.artRating) {
+    //   throw "Art Rating not found for item"
+    // }
+    // if (!art.numRatings) {
+    //   throw "Number of ratings not found for item"
+    // }
+    if (!art._id) {
+      throw "Art ID not found for item"
+    }
+    if (!art.typeGenre) {
+      throw "Art Genre not found for item"
+    }
+    if (!art.artComments) {
+      throw "Art Comments not found for item"
+    }
+    if (!art.timeUploaded) {
+      throw "No upload time for item"
+    }
+
     req.session.artId = art._id;
-    console.log("art id is" + art._id);
+    //console.log("art id is" + art._id);
     res.render("../views/pages/artItem", {
       artTitle: art.artTitle,
       artDescription: art.artDescription,
       imageSource: art.imageSource,
-      artist: artist.userName,
+      artistName: artist.userName,
       artistId: art.userId,
       artRating: art.artRating,
       numRatings: art.numRatings,
@@ -32,6 +67,7 @@ router.get("/:id", async (req, res) => {
       purchasePage: "/purchaseItem",
       comments: art.artComments,
       loggedInUser: req.session.userId,
+      timeUploaded:art.timeUploaded
     });
   } catch (e) {
     res.render("../views/pages/error", { error: e });
@@ -137,35 +173,29 @@ router.post("/submitart", upload.single("image"), async (req, res) => {
       return;
     }
     artSubmissionInfo.typeGenre = artSubmissionInfo.typeGenre.trim();
-
     const result = await cloudinary.uploader.upload(req.file.path);
 
     const newArtSubmission = await artItemApi.createArtItem(
-      req.session.userId,
-      artSubmissionInfo.artTitle,
-      artSubmissionInfo.artDescription,
-      artSubmissionInfo.forSale,
-      artSubmissionInfo.setPrice,
+      xss(req.session.userId),
+      xss(artSubmissionInfo.artTitle),
+      xss(artSubmissionInfo.artDescription),
+      xss(artSubmissionInfo.forSale),
+      xss(artSubmissionInfo.setPrice),
       0,
-      artSubmissionInfo.typeGenre,
+      xss(artSubmissionInfo.typeGenre),
       result.secure_url,
-      result.public_id
+      result.public_id,
     );
-    //console.log(newArtSubmission);
     res.status(200).redirect("/item/" + newArtSubmission._id);
   } catch (e) {
-    //console.log("hi");
-    //console.log(e);
     res.status(400).render("../views/pages/error", { error: e });
   }
 });
 router.post("/rateArt", async (req, res) => {
   try {
-    let newRating = req.body.rating;
-    let artId = req.body.artId;
-    if (artRating === "none") {
-      // TODO: error check
-    }
+    let newRating = xss(req.body.rating);
+    let artId = xss(req.body.artId);
+   
     const update = await artItemApi.updateRating(artId, newRating);
     res.redirect(`/item/${artId}`);
   } catch (e) {
@@ -174,7 +204,7 @@ router.post("/rateArt", async (req, res) => {
 });
 router.post("/comment", async (req, res) => {
   try {
-    let comment = req.body.comment;
+    let comment = xss(req.body.comment);
     let artId = req.body.artId;
     let userId = req.body.userId;
     console.log("comment", comment);

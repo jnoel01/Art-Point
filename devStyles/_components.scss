@@ -60,7 +60,6 @@
   color: #404040;
   right: 0px;
   padding-left: inherit;
-  padding-top: 15px;
 }
 .search__link {
   text-decoration: none;
@@ -70,3 +69,25 @@
   color: red;
   font-style: italic;
 }
+
+/* SEARCH RESULTS PAGE */
+.account__post {
+  box-shadow: 0px 1rem 1.5rem rgba(black, 0.5);
+  margin: auto;
+  text-align: center;
+  margin: 30px;
+  padding: 20px;
+  border-radius: 2rem;
+}
+.account__link {
+  text-decoration: none;
+  color: black;
+}
+.account__name {
+  font-family: "Fugaz One";
+}
+.account__username {
+  font-style: italic;
+}
+
+

@@ -62,7 +62,7 @@ let exportedMethods = {
     dupeCheck = await userCollection.findOne({ userEmail: email });
     if (dupeCheck) throw "This email is already in use! Try another one.";
 
-    // -------------- get the date they created the account ------------------
+    // -------------- get the date they created the account -----------------
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, "0");
     var mm = String(today.getMonth() + 1).padStart(2, "0");
@@ -87,7 +87,7 @@ let exportedMethods = {
     const newInsertInformation = await userCollection.insertOne(userInserted);
     if (!newInsertInformation.insertedId) throw "Insert failed!";
 
-    return await { userInserted: true };
+    return await { userInserted: true, userID: newInsertInformation.insertedId };
   },
   async checkUser(username, password) {
     console.log("before await");
@@ -163,16 +163,15 @@ let exportedMethods = {
     // --------- finding user ----------
     let usernameLower = username.toLowerCase();
 
-    let userToCheck = await userCollection.findOne({ username: usernameLower });
+    let userToCheck = await userCollection.findOne({ userName: usernameLower });
     if (!userToCheck) throw "Could not find this username. Please try another!";
 
     let hashPass = await bcrypt.hash(password, 16);
-
     userCollection.updateOne(
-      { username: usernameLower },
+      { userName: usernameLower},
       {
         $set: {
-          password: hashPass,
+          hashedPassword: hashPass,
         },
       }
     );
